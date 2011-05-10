@@ -3,7 +3,7 @@
 Plugin Name: CryptograPHP
 Version: auto
 Description: Add a CryptograPHP captcha to register and ContactForm pages (thanks to P@t)
-Plugin URI: http://piwigo.org/ext/extension_view.php?eid=
+Plugin URI: http://piwigo.org/ext/extension_view.php?eid=535
 Author: Mistic
 Author URI: http://www.strangeplanet.fr
 */
