@@ -1,0 +1,1 @@
+Add a CryptograPHP captcha to register and ContactForm pages (thanks to P@t)
