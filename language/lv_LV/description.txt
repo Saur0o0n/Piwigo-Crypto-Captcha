@@ -1,0 +1,1 @@
+Pievieno CryptograPHP captcha reģistram un KontaktFormas lapām
