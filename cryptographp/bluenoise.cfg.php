@@ -26,7 +26,7 @@ $bgB  = 255;         // Couleur du fond au format RGB: Blue (0->255)
 $bgclear = false;     // Fond transparent (true/false)
                      // Uniquement valable pour le format PNG
 
-$bgimg = 'bg.jpg';                 // Le fond du cryptogramme peut-être une image  
+$bgimg = '';                 // Le fond du cryptogramme peut-être une image  
                              // PNG, GIF ou JPG. Indiquer le fichier image
                              // Exemple: $fondimage = 'photo.gif';
 				                     // L'image sera redimensionnée si nécessaire

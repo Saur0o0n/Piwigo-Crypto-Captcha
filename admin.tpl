@@ -8,7 +8,7 @@
   
   {foreach from=$available_themes item=theme}
   <div style="display:inline-block;margin-top:5px;">
-   <label for="{$theme}-example"><img src="{$CRYPTO_PATH}cryptographp/{$theme}.png" alt="{$theme}"/></label> <br/>
+   <label for="{$theme}-example"><img src="{$CRYPTO_PATH}cryptographp/images/{$theme}.png" alt="{$theme}"/></label> <br/>
     <input type="radio" name="cryptographp_theme" id="{$theme}-example" value="{$theme}" {if $theme == $cryptographp_theme}checked="checked"{/if}/>
   </div>
   {/foreach}
