@@ -13,7 +13,7 @@ function add_captcha()
   global $template, $conf;
 
   $template->set_prefilter('register', 'captcha_prefilter');
-  $template->assign('CAPTCHA', dsp_crypt($conf['cryptographp_theme'].'.cfg.php',1));
+  $template->assign('CAPTCHA', dsp_crypt($conf['cryptographp_theme'][0].'.cfg.php',1));
 }
 
 function captcha_prefilter($content, $smarty)
@@ -40,8 +40,6 @@ function captcha_prefilter($content, $smarty)
 
 function check_captcha($errors)
 {
-  global $conf;
-
   if (!chk_crypt($_POST['code']))
   {
     load_language('plugin.lang', CRYPTO_PATH);

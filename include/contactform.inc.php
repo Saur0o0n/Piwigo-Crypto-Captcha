@@ -12,10 +12,10 @@ function add_captcha()
 {
   global $template, $conf;
 
-  // if (!is_a_guest()) return;
+  if (!is_a_guest()) return;
 
   $template->set_prefilter('cf_form', 'captcha_prefilter');
-  $template->assign('CAPTCHA', dsp_crypt($conf['cryptographp_theme'].'.cfg.php',1));
+  $template->assign('CAPTCHA', dsp_crypt($conf['cryptographp_theme'][0].'.cfg.php',1));
 }
 
 function captcha_prefilter($content, $smarty)
@@ -37,8 +37,6 @@ function captcha_prefilter($content, $smarty)
 
 function check_captcha($infos)
 {
-  global $conf;
-
   if (!is_a_guest()) return $infos;
 
   if (!chk_crypt($_POST['code']))
