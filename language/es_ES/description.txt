@@ -1,1 +1,1 @@
-Añadir un captcha Cryptographp a la página de registro y en la página de ContactForm
+Añadir un captcha Cryptographp a la página de registro, en el formulario de commentar y en la página de ContactForm
