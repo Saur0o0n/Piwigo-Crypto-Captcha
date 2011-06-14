@@ -5,18 +5,18 @@ if (!defined('PHPWG_ROOT_PATH')) die('Hacking attempt!');
 $cryptinstall = CRYPTO_PATH.'cryptographp/cryptographp.fct.php';
 include($cryptinstall);
 
-add_event_handler('loc_end_page_header', 'add_captcha');
-add_event_handler('register_user_check', 'check_captcha');
+add_event_handler('loc_end_page_header', 'add_crypto');
+add_event_handler('register_user_check', 'check_crypto');
 
-function add_captcha()
+function add_crypto()
 {
   global $template, $conf;
 
-  $template->set_prefilter('register', 'captcha_prefilter');
+  $template->set_prefilter('register', 'prefilter_crypto');
   $template->assign('CAPTCHA', dsp_crypt($conf['cryptographp_theme'][0].'.cfg.php',1));
 }
 
-function captcha_prefilter($content, $smarty)
+function prefilter_crypto($content, $smarty)
 {
   load_language('plugin.lang', CRYPTO_PATH);
   
@@ -38,7 +38,7 @@ function captcha_prefilter($content, $smarty)
   return str_replace($search, $replace, $content);
 }
 
-function check_captcha($errors)
+function check_crypto($errors)
 {
   if (!chk_crypt($_POST['code']))
   {

@@ -5,20 +5,20 @@ if (!defined('PHPWG_ROOT_PATH')) die('Hacking attempt!');
 $cryptinstall = CRYPTO_PATH.'cryptographp/cryptographp.fct.php';
 include($cryptinstall);
 
-add_event_handler('display_contactform', 'add_captcha');
-add_event_handler('check_contactform_params', 'check_captcha');
+add_event_handler('display_contactform', 'add_crypto');
+add_event_handler('check_contactform_params', 'check_crypto');
 
-function add_captcha()
+function add_crypto()
 {
   global $template, $conf;
 
   if (!is_a_guest()) return;
 
-  $template->set_prefilter('cf_form', 'captcha_prefilter');
+  $template->set_prefilter('cf_form', 'prefilter_crypto');
   $template->assign('CAPTCHA', dsp_crypt($conf['cryptographp_theme'][0].'.cfg.php',1));
 }
 
-function captcha_prefilter($content, $smarty)
+function prefilter_crypto($content, $smarty)
 {
   $search = '
       <tr>
@@ -35,7 +35,7 @@ function captcha_prefilter($content, $smarty)
   return str_replace($search, $replace, $content);
 }
 
-function check_captcha($infos)
+function check_crypto($infos)
 {
   if (!is_a_guest()) return $infos;
 

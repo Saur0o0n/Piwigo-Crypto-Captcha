@@ -41,21 +41,21 @@ function crypto_init()
 
 if (script_basename() == 'admin')
 {
-  add_event_handler('get_admin_plugin_menu_links', 'crypto_plugin_admin_menu' );
-}
+  add_event_handler('get_admin_plugin_menu_links', 'crypto_plugin_admin_menu');
 
-function crypto_plugin_admin_menu($menu)
-{
-	global $page,$conf;
+  function crypto_plugin_admin_menu($menu)
+  {
+    global $page,$conf;
 
-	array_push(
-    $menu,
-    array(
-      'NAME' => 'CryptograPHP',
-      'URL' => get_root_url().'admin.php?page=plugin-'.basename(dirname(__FILE__))
-      )
-		);
-	return $menu;
+    array_push(
+      $menu,
+      array(
+        'NAME' => 'CryptograPHP',
+        'URL' => get_root_url().'admin.php?page=plugin-'.basename(dirname(__FILE__))
+        )
+      );
+    return $menu;
+  }
 }
 
 ?>
