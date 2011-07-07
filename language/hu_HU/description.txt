@@ -1,0 +1,1 @@
+CryptograPHP captcha hozzáadása a regisztrációs, komment és KapcsolatŰrlap oldalakhoz.
