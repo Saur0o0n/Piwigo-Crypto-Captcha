@@ -1,1 +1,1 @@
-Añade un captcha CryptograPHP a la página de registro y en la página de ContactForm (gracias a P@t)
+Añade un captcha a la página de registro y en la página de ContactForm (gracias a P@t)

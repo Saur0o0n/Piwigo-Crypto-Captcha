@@ -2,10 +2,19 @@
 /*
 Plugin Name: Crypto Captcha
 Version: auto
-Description: Add a CryptograPHP captcha to register, comment and ContactForm pages (thanks to P@t)
+Description: Add a captcha to register, comment and ContactForm pages (thanks to P@t)
 Plugin URI: http://piwigo.org/ext/extension_view.php?eid=535
 Author: Mistic
 Author URI: http://www.strangeplanet.fr
+*/
+
+## TODO : add customization of background image
+
+/*
+Author note :
+Le plugin était appellé à l'origine CryptograPHP et utilisait la librairie CryptograPHP
+Puis il a été renommé Crypto Captcha pour plus de clareté
+La version actuelle s'appelle toujours Crypto Captcha mais utilise la librairie Securimage
 */
 
 if (!defined('PHPWG_ROOT_PATH')) die('Hacking attempt!');
@@ -16,26 +25,29 @@ add_event_handler('loc_end_section_init', 'crypto_init');
 function crypto_init()
 {
   global $conf, $pwg_loaded_plugins, $page;
-  $conf['cryptographp_theme'] = explode(',', $conf['cryptographp_theme']);
+  
+  $conf['cryptographp'] = unserialize($conf['cryptographp']);
+  load_language('plugin.lang', CRYPTO_PATH);
   
   if (script_basename() == 'register')
   {
     include(CRYPTO_PATH.'include/register.inc.php');
   }
-  else if (script_basename() == 'picture' AND $conf['cryptographp_theme'][1] != 'inactive')
+  else if (script_basename() == 'picture' and $conf['cryptographp']['comments_action'] != 'inactive')
   {
     include(CRYPTO_PATH.'include/picture.inc.php');
-  }
-  else if (
-    script_basename() == 'index' AND $conf['cryptographp_theme'][1] != 'inactive' AND 
-    isset($pwg_loaded_plugins['Comments_on_Albums']) AND 
-    $page['section'] == 'categories' AND isset($page['category'])
-  ) {
-    include(CRYPTO_PATH.'include/category.inc.php');
   }
   else if (isset($_GET['/contact'])) 
   {
     include(CRYPTO_PATH.'include/contactform.inc.php');
+  }
+  else if (
+    script_basename() == 'index' and $conf['cryptographp']['comments_action'] != 'inactive' and 
+    isset($pwg_loaded_plugins['Comments_on_Albums']) and isset($page['section']) and 
+    $page['section'] == 'categories' and isset($page['category'])
+    ) 
+  {
+    include(CRYPTO_PATH.'include/category.inc.php');
   }
 }
 
@@ -45,15 +57,10 @@ if (script_basename() == 'admin')
 
   function crypto_plugin_admin_menu($menu)
   {
-    global $page,$conf;
-
-    array_push(
-      $menu,
-      array(
-        'NAME' => 'CryptograPHP',
-        'URL' => get_root_url().'admin.php?page=plugin-'.basename(dirname(__FILE__))
-        )
-      );
+    array_push($menu, array(
+      'NAME' => 'Crypto Captcha',
+      'URL' => get_root_url().'admin.php?page=plugin-'.basename(dirname(__FILE__))
+      ));
     return $menu;
   }
 }

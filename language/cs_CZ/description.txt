@@ -1,1 +1,1 @@
-Vloží CryptograPHP captcha ověření pro registrační stránku a kontaktní formulář (thanks to P@t)
+Vloží captcha ověření pro registrační stránku a kontaktní formulář (thanks to P@t)

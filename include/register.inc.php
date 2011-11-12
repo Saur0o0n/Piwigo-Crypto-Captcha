@@ -1,48 +1,47 @@
 <?php
-
 if (!defined('PHPWG_ROOT_PATH')) die('Hacking attempt!');
-
-$cryptinstall = CRYPTO_PATH.'cryptographp/cryptographp.fct.php';
-include($cryptinstall);
 
 add_event_handler('loc_end_page_header', 'add_crypto');
 add_event_handler('register_user_check', 'check_crypto');
 
 function add_crypto()
 {
-  global $template, $conf;
+  global $template;
 
   $template->set_prefilter('register', 'prefilter_crypto');
-  $template->assign('CAPTCHA', dsp_crypt($conf['cryptographp_theme'][0].'.cfg.php',1));
 }
 
 function prefilter_crypto($content, $smarty)
 {
-  load_language('plugin.lang', CRYPTO_PATH);
+  global $conf;
   
-  $search = '<p class="bottomButtons">';
+  $search = '#\<\/ul\>(.{0,10})\<\/fieldset\>(.{0,10})\<p class\=\"bottomButtons\"\>#is';
   $replace = '
-  <fieldset>
-    <legend>{\'Antibot test\'|@translate}</legend>
-    <ul>
       <li>
         <span class="property">
-          <label>{$CAPTCHA}</label>
+          <label><img id="captcha" src="'.CRYPTO_PATH.'securimage/securimage_show.php" alt="CAPTCHA Image"></label>
         </span>
-        <input type="text" name="code">
+        <b>{\''.($conf['cryptographp']['captcha_type']=='string'?'Enter code':'Solve equation').'\'|@translate} :</b><br>
+        <input type="text" name="captcha_code" size="'.($conf['cryptographp']['code_length']+1).'" maxlength="'.$conf['cryptographp']['code_length'].'" />
+        <a href="#" onclick="document.getElementById(\'captcha\').src = \''.CRYPTO_PATH.'securimage/securimage_show.php?\' + Math.random(); return false">
+          <img src="'.CRYPTO_PATH.'template/refresh.png"></a>
       </li>
-    </ul>
-  </fieldset>'
-."\n".$search;
+  </ul>
 
-  return str_replace($search, $replace, $content);
+  </fieldset>
+
+  <p class="bottomButtons">';
+
+  return preg_replace($search, $replace, $content);
 }
 
 function check_crypto($errors)
 {
-  if (!chk_crypt($_POST['code']))
+  include_once(CRYPTO_PATH.'securimage/securimage.php');
+  $securimage = new Securimage();
+  
+  if ($securimage->check($_POST['captcha_code']) == false)
   {
-    load_language('plugin.lang', CRYPTO_PATH);
     array_push($errors, l10n('Invalid Captcha'));
   }
 

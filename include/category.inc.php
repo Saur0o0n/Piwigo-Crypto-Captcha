@@ -1,53 +1,54 @@
 <?php
-
 if (!defined('PHPWG_ROOT_PATH')) die('Hacking attempt!');
-
-$cryptinstall = CRYPTO_PATH.'cryptographp/cryptographp.fct.php';
-include($cryptinstall);
 
 add_event_handler('loc_begin_index', 'add_crypto');
 add_event_handler('user_comment_check', 'check_crypto', EVENT_HANDLER_PRIORITY_NEUTRAL, 2);
 
 function add_crypto()
 {
-  global $template, $conf;
+  global $template;
   
   if (!is_a_guest()) return;
   
   $template->set_prefilter('comments_on_albums', 'prefilter_crypto');
-  $template->assign('CAPTCHA', dsp_crypt($conf['cryptographp_theme'][0].'.cfg.php',1));
 }
 
 function prefilter_crypto($content, $smarty)
 {
-  load_language('plugin.lang', CRYPTO_PATH);
+  global $conf;
   
   $search = '<input type="hidden" name="key" value="{$comment_add.KEY}">';
   $replace = $search.'
-  <label>{$CAPTCHA}<input type="text" name="code"></label>';
+  <label>
+    <img id="captcha" src="'.CRYPTO_PATH.'securimage/securimage_show.php" alt="CAPTCHA Image">
+    <a href="#" onclick="document.getElementById(\'captcha\').src = \''.CRYPTO_PATH.'securimage/securimage_show.php?\' + Math.random(); return false">
+      <img src="'.CRYPTO_PATH.'template/refresh.png"></a>
+    <br>{\''.($conf['cryptographp']['captcha_type']=='string'?'Enter code':'Solve equation').'\'|@translate} :
+    <input type="text" name="captcha_code" size="'.($conf['cryptographp']['code_length']+1).'" maxlength="'.$conf['cryptographp']['code_length'].'" />
+    
+  </label>';
 
   return str_replace($search, $replace, $content);
 }
 
 function check_crypto($action, $comment)
 {
-  global $conf, $user;
+  global $conf;
   
-  $my_action = ($conf['cryptographp_theme'][1] == 'reject') ? 'reject':'moderate';
+  include_once(CRYPTO_PATH.'securimage/securimage.php');
+  $securimage = new Securimage();
 
-  if ($action == 'reject' OR $action == $my_action OR !is_a_guest())
+  if ( $action == 'reject' or $action == $conf['cryptographp']['comments_action'] or !is_a_guest() )
   {
     return $action;
   }
 
-  if (!chk_crypt($_POST['code']))
+  if ($securimage->check($_POST['captcha_code']) == false)
   {
-    return $my_action;
+    return $conf['cryptographp']['comments_action'];
   }
-  else
-  {
-    return $action;
-  }
+
+  return $action;
 }
 
 ?>
