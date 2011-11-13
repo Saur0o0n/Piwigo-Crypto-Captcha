@@ -17,8 +17,8 @@ function prefilter_crypto($content, $smarty)
 {
   global $conf;
   
-  $search = '<input type="hidden" name="key" value="{$comment_add.KEY}">';
-  $replace = $search.'
+  $search = '#<input type="hidden" name="key" value="{\$comment_add\.KEY}"([ /]*)>#';
+  $replace = '<input type="hidden" name="key" value="{$comment_add.KEY}"$1>'.'
   <label>
     <img id="captcha" src="'.CRYPTO_PATH.'securimage/securimage_show.php" alt="CAPTCHA Image">
     <a href="#" onclick="document.getElementById(\'captcha\').src = \''.CRYPTO_PATH.'securimage/securimage_show.php?\' + Math.random(); return false">
@@ -28,7 +28,7 @@ function prefilter_crypto($content, $smarty)
     
   </label>';
 
-  return str_replace($search, $replace, $content);
+  return preg_replace($search, $replace, $content);
 }
 
 function check_crypto($action, $comment)

@@ -48,7 +48,7 @@
 define('PHPWG_ROOT_PATH','../../../');
 include_once(PHPWG_ROOT_PATH.'include/common.inc.php');
 
-$conf['cryptographp'] = unserialize($conf['cryptographp']);
+// $conf['cryptographp'] = unserialize($conf['cryptographp']);
 
 // randomize colors
 function randomColor()

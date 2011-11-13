@@ -1,7 +1,7 @@
 <?php
 if (!defined('PHPWG_ROOT_PATH')) die('Hacking attempt!');
 
-$conf['cryptographp'] = unserialize($conf['cryptographp']);
+// $conf['cryptographp'] = unserialize($conf['cryptographp']);
 load_language('plugin.lang', CRYPTO_PATH);
 
 if ( isset($_POST['submit']))

@@ -20,11 +20,12 @@ La version actuelle s'appelle toujours Crypto Captcha mais utilise la librairie 
 if (!defined('PHPWG_ROOT_PATH')) die('Hacking attempt!');
 define('CRYPTO_PATH' , PHPWG_PLUGINS_PATH . basename(dirname(__FILE__)) . '/');
 
-add_event_handler('loc_end_section_init', 'crypto_init');
+add_event_handler('init', 'crypto_init');
+add_event_handler('loc_end_section_init', 'crypto_section_init');
 
 function crypto_init()
 {
-  global $conf, $pwg_loaded_plugins, $page;
+  global $conf, $user;
   
   $conf['cryptographp'] = unserialize($conf['cryptographp']);
   load_language('plugin.lang', CRYPTO_PATH);
@@ -37,11 +38,18 @@ function crypto_init()
   {
     include(CRYPTO_PATH.'include/picture.inc.php');
   }
-  else if (isset($_GET['/contact'])) 
+  // because of ContactForm specificities, Captcha can't be displayed on these themes
+  else if ( isset($_GET['/contact']) and strstr($user['theme'], 'simple') === false and strstr($user['theme'], 'stripped') === false ) 
   {
     include(CRYPTO_PATH.'include/contactform.inc.php');
   }
-  else if (
+}
+
+function crypto_section_init()
+{
+  global $conf, $pwg_loaded_plugins, $page;
+  
+  if (
     script_basename() == 'index' and $conf['cryptographp']['comments_action'] != 'inactive' and 
     isset($pwg_loaded_plugins['Comments_on_Albums']) and isset($page['section']) and 
     $page['section'] == 'categories' and isset($page['category'])
