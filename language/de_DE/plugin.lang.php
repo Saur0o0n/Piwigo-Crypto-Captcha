@@ -44,4 +44,5 @@ $lang['Text color'] = 'Text Farbe';
 $lang['Tip: type "random" on a color field to have a random color'] = 'Tipp: Geben Sie "Zufällig" auf einem Farbfeld ein, um eine Zufalls Farbe zu bekommen';
 $lang['good value:'] = 'guter Wert';
 $lang['range:'] = 'Bereich';
+$lang['random'] = 'zufällig';
 ?>
