@@ -1,6 +1,7 @@
 <?php
 if (!defined('PHPWG_ROOT_PATH')) die('Hacking attempt!');
 
+load_language('plugin.lang', CRYPTO_PATH);
 add_event_handler('loc_end_page_header', 'add_crypto');
 add_event_handler('register_user_check', 'check_crypto');
 
@@ -13,23 +14,18 @@ function add_crypto()
 
 function prefilter_crypto($content, $smarty)
 {
-  global $conf;
-  
-  $search = '#\<\/ul\>(.{0,10})\<\/fieldset\>(.{0,10})\<p class\=\"bottomButtons\"\>#is';
-  $replace = '
+  global $conf, $user;
+    
+  $search = '#\(\{\'useful when password forgotten\'\|@translate\}\)(\s*)((\{/if\})?)#i';
+  $replace = '({\'useful when password forgotten\'|@translate})$1$2
+      </li>
       <li>
         <span class="property">
-          <label>{\''.($conf['cryptographp']['captcha_type']=='string'?'Enter code':'Solve equation').'\'|@translate} <img id="captcha" src="'.CRYPTO_PATH.'securimage/securimage_show.php" alt="CAPTCHA Image"></label>
+          <label for="captcha_code">{\''.($conf['cryptographp']['captcha_type']=='string'?'Enter code':'Solve equation').'\'|@translate} <img id="captcha" src="'.CRYPTO_PATH.'securimage/securimage_show.php" alt="CAPTCHA Image"></label>
+          <a href="#" onclick="document.getElementById(\'captcha\').src = \''.CRYPTO_PATH.'securimage/securimage_show.php?\' + Math.random(); return false">
+            <img src="'.CRYPTO_PATH.'template/refresh.png"></a>
         </span>
-        <input type="text" name="captcha_code" size="'.($conf['cryptographp']['code_length']+1).'" maxlength="'.$conf['cryptographp']['code_length'].'" />
-        <a href="#" onclick="document.getElementById(\'captcha\').src = \''.CRYPTO_PATH.'securimage/securimage_show.php?\' + Math.random(); return false">
-          <img src="'.CRYPTO_PATH.'template/refresh.png"></a>
-      </li>
-  </ul>
-
-  </fieldset>
-
-  <p class="bottomButtons">';
+        <input type="text" id="captcha_code" name="captcha_code" size="'.($conf['cryptographp']['code_length']+1).'" maxlength="'.$conf['cryptographp']['code_length'].'" />';
 
   return preg_replace($search, $replace, $content);
 }

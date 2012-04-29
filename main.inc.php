@@ -27,8 +27,10 @@ function crypto_init()
 {
   global $conf, $user;
   
+  // brace yourself, smartphones spammers are comming !
+  if ($user['theme'] == 'smartpocket') return;
+  
   $conf['cryptographp'] = unserialize($conf['cryptographp']);
-  load_language('plugin.lang', CRYPTO_PATH);
   
   if (script_basename() == 'register')
   {
@@ -38,8 +40,7 @@ function crypto_init()
   {
     include(CRYPTO_PATH.'include/picture.inc.php');
   }
-  // because of ContactForm specificities, Captcha can't be displayed on these themes
-  else if ( isset($_GET['/contact']) and strstr($user['theme'], 'simple') === false and strstr($user['theme'], 'stripped') === false ) 
+  else if (isset($_GET['/contact'])) 
   {
     include(CRYPTO_PATH.'include/contactform.inc.php');
   }

@@ -17,6 +17,7 @@ $lang['Captcha theme'] = 'Captcha theme';
 
 $lang['Perturbation'] = 'Perturbation';
 $lang['range:'] = 'range:';
+$lang['random'] = 'random';
 $lang['Background color'] = 'Background color';
 $lang['Text color'] = 'Text color';
 $lang['Lines density'] = 'Lines density';

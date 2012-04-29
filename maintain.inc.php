@@ -1,5 +1,5 @@
 <?php
-define('default_config', serialize(array(
+define('crypto_default_config', serialize(array(
   'comments_action' => 'reject',
   'theme'           => 'gray',
   'captcha_type'    => 'string',
@@ -23,7 +23,7 @@ function plugin_install()
   
   if (!isset($conf['cryptographp']))
   {
-    pwg_query('INSERT INTO '.CONFIG_TABLE.' (param,value,comment) VALUES ("cryptographp",\''.default_config.'\',"CryptograPHP config");');
+    pwg_query('INSERT INTO '.CONFIG_TABLE.' (param,value,comment) VALUES ("cryptographp",\''.crypto_default_config.'\',"CryptograPHP config");');
   }
 }
 
@@ -33,14 +33,15 @@ function plugin_activate()
   
   if (isset($conf['cryptograph_theme']))
   {
-    pwg_query('DELETE FROM '.CONFIG_TABLE.' WHERE param="cryptographp_theme" LIMIT 1');
+    pwg_query('DELETE FROM '.CONFIG_TABLE.' WHERE param="cryptographp_theme" LIMIT 1;');
   }
   
-  if (!isset($conf['cryptograph']))
+  if (!isset($conf['cryptographp']))
   {
-    pwg_query('INSERT INTO '.CONFIG_TABLE.' (param,value,comment) VALUES ("cryptographp",\''.default_config.'\',"CryptograPHP config");');
+    pwg_query('INSERT INTO '.CONFIG_TABLE.' (param,value,comment) VALUES ("cryptographp",\''.crypto_default_config.'\',"CryptograPHP config");');
   }
 }
+
 function plugin_uninstall()
 {
   pwg_query('DELETE FROM '.CONFIG_TABLE.' WHERE param="cryptographp" LIMIT 1');

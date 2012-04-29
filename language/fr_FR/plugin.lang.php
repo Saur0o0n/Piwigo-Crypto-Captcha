@@ -1,7 +1,7 @@
 <?php
 
 $lang['Invalid Captcha'] = 'Captcha non valide';
-$lang['Enter code'] = 'Entrez le code';
+$lang['Enter code'] = 'Recopiez le code';
 $lang['Solve equation'] = 'Resolvez l\'équation';
 
 $lang['Comments action'] = 'Action pour les commentaires';
@@ -17,6 +17,7 @@ $lang['Captcha theme'] = 'Thème du captcha';
 
 $lang['Perturbation'] = 'Perturbation';
 $lang['range:'] = 'plage:';
+$lang['random'] = 'aléatoire';
 $lang['Background color'] = 'Couleur de fond';
 $lang['Text color'] = 'Couleur du texte';
 $lang['Lines density'] = 'Nombre de lignes';

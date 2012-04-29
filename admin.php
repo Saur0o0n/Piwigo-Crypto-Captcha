@@ -10,7 +10,7 @@ if ( isset($_POST['submit']))
     'comments_action' => $_POST['comments_action'],
     'theme'           => $_POST['theme'],
     'captcha_type'    => $_POST['captcha_type'],
-    'case_sensitive'  => $conf['cryptographp']['case_sensitive'], //not used, problem with some fonts
+    'case_sensitive'  => 'false', //not used, problem with some fonts
     'width'           => (int)$_POST['width'], 
     'height'          => (int)$_POST['height'],
     'perturbation'    => (float)$_POST['perturbation'],
@@ -29,10 +29,10 @@ if ( isset($_POST['submit']))
 }
 
 $presets = array(
-  'bluenoise' => array('perturbation'=>0.25, 'image_bg_color'=>'ffffff', 'text_color'=>'0000ff', 'num_lines'=>2, 'line_color'=>'0000ff', 'noise_level'=>2, 'noise_color'=>'0000ff', 'ttf_file'=>'AlteHassGroteskB'),
-  'gray' => array('perturbation'=>1, 'image_bg_color'=>'ffffff', 'text_color'=>'8a8a8a', 'num_lines'=>2, 'line_color'=>'8a8a8a', 'noise_level'=>0.1, 'noise_color'=>'8a8a8a', 'ttf_file'=>'TopSecret'),
-  'xcolor' => array('perturbation'=>0.5, 'image_bg_color'=>'ffffff', 'text_color'=>'random', 'num_lines'=>1, 'line_color'=>'ffffff', 'noise_level'=>2, 'noise_color'=>'ffffff', 'ttf_file'=>'Dread'),
-  'pencil' => array('perturbation'=>0.8, 'image_bg_color'=>'9e9e9e', 'text_color'=>'363636', 'num_lines'=>0, 'line_color'=>'ffffff', 'noise_level'=>0, 'noise_color'=>'ffffff', 'ttf_file'=>'AllStar'),
+  'bluenoise' =>  array('perturbation'=>0.25, 'image_bg_color'=>'ffffff', 'text_color'=>'0000ff', 'num_lines'=>2, 'line_color'=>'0000ff', 'noise_level'=>2,   'noise_color'=>'0000ff', 'ttf_file'=>'AlteHassGroteskB'),
+  'gray' =>       array('perturbation'=>1,    'image_bg_color'=>'ffffff', 'text_color'=>'8a8a8a', 'num_lines'=>2, 'line_color'=>'8a8a8a', 'noise_level'=>0.1, 'noise_color'=>'8a8a8a', 'ttf_file'=>'TopSecret'),
+  'xcolor' =>     array('perturbation'=>0.5,  'image_bg_color'=>'ffffff', 'text_color'=>'random', 'num_lines'=>1, 'line_color'=>'ffffff', 'noise_level'=>2,   'noise_color'=>'ffffff', 'ttf_file'=>'Dread'),
+  'pencil' =>     array('perturbation'=>0.8,  'image_bg_color'=>'9e9e9e', 'text_color'=>'363636', 'num_lines'=>0, 'line_color'=>'ffffff', 'noise_level'=>0,   'noise_color'=>'ffffff', 'ttf_file'=>'AllStar'),
   );
   
 function list_fonts($dir)
@@ -66,7 +66,6 @@ function apply_'.$name.'() {
   $("input[name=noise_level]").val("'.$param['noise_level'].'");
   $("input[name=noise_color]").val("'.$param['noise_color'].'");
   $("input[name=ttf_file]").val(["'.$param['ttf_file'].'"]);
-
 }';
   }
    

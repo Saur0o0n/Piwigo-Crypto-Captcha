@@ -3,47 +3,87 @@
 
 {footer_script require='jquery.colorpicker'}{literal}
 jQuery(document).ready(function() {
+  // colorpicker
   $('.colorpicker-input')
-  .ColorPicker({
-    onSubmit: function(hsb, hex, rgb, el) { 
-      $(el).val(hex); 
-      $(el).ColorPickerHide(); 
-    },
-    onChange: function(hsb, hex, rgb, el) { 
-      $(el).val(hex); 
-      changeColor(el, hex); 
-      $('.preset').removeClass('selected'); 
-      $('input[name=theme]').val('custom');
-    },
-    onBeforeShow: function () { 
-      $(this).ColorPickerSetColor(this.value); 
-    }
-  })
-  .bind('keyup', function(){ 
-    $(this).ColorPickerSetColor(this.value);
-    changeColor(this, $(this).val());
-  })
-  .each(function() {
-    changeColor(this, $(this).val());
-  });
+    .ColorPicker({
+      onSubmit: function(hsb, hex, rgb, el) { 
+        $(el).val(hex); 
+        $(el).ColorPickerHide(); 
+      },
+      onChange: function(hsb, hex, rgb, el) { 
+        $(el).val(hex); 
+        changeColor(el, hex);
+        changePreview();
+        setThemeCutom();
+      },
+      onBeforeShow: function () { 
+        $(this).ColorPickerSetColor(this.value); 
+      }
+    })
+    .bind('keyup', function(){ 
+      $(this).ColorPickerSetColor(this.value);
+      changeColor(this, $(this).val());
+    })
+    .each(function() {
+      changeColor(this, $(this).val());
+    });
   
+  // apply a preset
   $('.preset').click(function() {
     $('.preset').removeClass('selected');
     $(this).addClass('selected');
     eval('apply_'+ $(this).attr('title') +'();');
     $('.colorpicker-input').each(function() { changeColor(this, $(this).val()); });
     $('input[name=theme]').val($(this).attr('title'));
+    changePreview();
   });
   
+  // display customization panel
   $('.customize').click(function() {
-    $('#theming').fadeToggle();
+    $('#theming').toggle();
   });
   
+  // change theme to 'custom' if a parameter is changed
   $('input.istheme').change(function() {
-    $('.preset').removeClass('selected');
-    $('input[name=theme]').val('custom');
+    setThemeCutom();
+  });
+  
+  // update the preview
+  $('input.istheme, input.preview').change(function() {
+    changePreview();
+  });
+  $('#captcha').click(function() {
+    changePreview();
+  });
+  
+  // links for random color
+  $('a.random').click(function() {
+    $(this).prev('label').children('input').val('random');
+    changeColor($(this).prev('label').children('input'), 'random');
+    changePreview();
+    setThemeCutom();
   });
 });
+
+function setThemeCutom() {
+  $('.preset').removeClass('selected');
+  $('input[name=theme]').val('custom');
+}
+
+function changePreview()
+{
+  options = new Array();
+  str = '';
+  
+  $('input[type="text"], input[type="radio"]:checked').each(function() {
+    options[$(this).attr('name')] = $(this).val();
+  });
+  
+  for (x in options) {
+    str+= '&' + x + '=' + options[x];
+  }
+  $('#captcha').attr('src', '{/literal}{$CRYPTO_PATH}{literal}securimage/securimage_preview.php?' + new Date().getTime() + str);
+}
 
 function changeColor(target, color) {
   if (color == 'random') color = '808080';
@@ -67,6 +107,7 @@ function changeColor(target, color) {
   src: url({$CRYPTO_PATH}securimage/fonts/{$font}.ttf) format("truetype");  
 }
 {/foreach}
+
 .preset img {ldelim}
   margin:1px;
   padding:3px;
@@ -95,8 +136,8 @@ function changeColor(target, color) {
     </li>
     <li>
       <span class="property">{'Captcha type'|@translate}</span>
-      <label><input type="radio" name="captcha_type" value="string" {if $crypto.captcha_type == 'string'}checked="checked"{/if}> {'Random string'|@translate}</label>
-      <label><input type="radio" name="captcha_type" value="math" {if $crypto.captcha_type == 'math'}checked="checked"{/if}> {'Simple equation'|@translate}</label>
+      <label><input type="radio" name="captcha_type" class="preview" value="string" {if $crypto.captcha_type == 'string'}checked="checked"{/if}> {'Random string'|@translate}</label>
+      <label><input type="radio" name="captcha_type" class="preview" value="math" {if $crypto.captcha_type == 'math'}checked="checked"{/if}> {'Simple equation'|@translate}</label>
     </li>
     <!--<li>
       <span class="property">{'Case sensitive'|@translate}</span>
@@ -105,15 +146,15 @@ function changeColor(target, color) {
     </li>-->
     <li>
       <span class="property">{'Code lenght'|@translate}</span>
-      <label><input type="text" name="code_length" value="{$crypto.code_length}" size="6" maxlength="2"></label>
+      <label><input type="text" name="code_length" class="preview" value="{$crypto.code_length}" size="6" maxlength="2"></label>
     </li>
     <li>
       <span class="property">{'Width'|@translate}</span>
-      <label><input type="text" name="width" value="{$crypto.width}" size="6" maxlength="3"> {'good value:'|@translate} lenght*20</label>
+      <label><input type="text" name="width" class="preview" value="{$crypto.width}" size="6" maxlength="3"> {'good value:'|@translate} lenght&times;20</label>
     </li>
     <li>
       <span class="property">{'Height'|@translate}</span>
-      <label><input type="text" name="height" value="{$crypto.height}" size="6" maxlength="3"> {'good value:'|@translate} width/4</label>
+      <label><input type="text" name="height" class="preview" value="{$crypto.height}" size="6" maxlength="3"> {'good value:'|@translate} width/4</label>
     </li>
     <li>
       <span class="property">{'Captcha theme'|@translate}</span>
@@ -132,31 +173,35 @@ function changeColor(target, color) {
     <ul>
       <li>
         <span class="property">{'Perturbation'|@translate}</span>
-        <label><input type="text" name="perturbation" value="{$crypto.perturbation}" class="istheme" size="6" maxlength="4"> {'range:'|@translate} 0 to 1</label>
+        <label><input type="text" name="perturbation" value="{$crypto.perturbation}" class="istheme" size="6" maxlength="4"> {'range:'|@translate} 0 - 1</label>
       </li>
       <li>
         <span class="property">{'Background color'|@translate}</span>
-        <label><input type="text" name="image_bg_color" value="{$crypto.image_bg_color}" class="colorpicker-input istheme" size="6" maxlength="6"></label>
+        <label><input type="text" name="image_bg_color" value="{$crypto.image_bg_color}" class="colorpicker-input istheme" size="6" maxlength="6"></label> 
+        <a class="random" title="{'random'|@translate}"><img src="{$CRYPTO_PATH}/template/arrow_switch.png"></a>
       </li>
       <li>
         <span class="property">{'Text color'|@translate}</span>
-        <label><input type="text" name="text_color" value="{$crypto.text_color}" class="colorpicker-input istheme" size="6" maxlength="6"></label>
+        <label><input type="text" name="text_color" value="{$crypto.text_color}" class="colorpicker-input istheme" size="6" maxlength="6"></label> 
+        <a class="random" title="{'random'|@translate}"><img src="{$CRYPTO_PATH}/template/arrow_switch.png"></a>
       </li>
       <li>
         <span class="property">{'Lines density'|@translate}</span>
-        <label><input type="text" name="num_lines" value="{$crypto.num_lines}" class="istheme" size="6" maxlength="4"> {'range:'|@translate} 0 to 10</label>
+        <label><input type="text" name="num_lines" value="{$crypto.num_lines}" class="istheme" size="6" maxlength="4"> {'range:'|@translate} 0 - 10</label>
       </li>
       <li>
         <span class="property">{'Lines color'|@translate}</span>
-        <label><input type="text" name="line_color" value="{$crypto.line_color}" class="colorpicker-input istheme" size="6" maxlength="6"></label>
+        <label><input type="text" name="line_color" value="{$crypto.line_color}" class="colorpicker-input istheme" size="6" maxlength="6"></label> 
+        <a class="random" title="{'random'|@translate}"><img src="{$CRYPTO_PATH}/template/arrow_switch.png"></a>
       </li>
       <li>
         <span class="property">{'Noise level'|@translate}</span>
-        <label><input type="text" name="noise_level" value="{$crypto.noise_level}" class="istheme" size="6" maxlength="4"> {'range:'|@translate} 0 to 10</label>
+        <label><input type="text" name="noise_level" value="{$crypto.noise_level}" class="istheme" size="6" maxlength="4"> {'range:'|@translate} 0 - 10</label>
       </li>
       <li>
         <span class="property">{'Noise color'|@translate}</span>
-        <label><input type="text" name="noise_color" value="{$crypto.noise_color}" class="colorpicker-input istheme" size="6" maxlength="6"></label>
+        <label><input type="text" name="noise_color" value="{$crypto.noise_color}" class="colorpicker-input istheme" size="6" maxlength="6"></label> 
+        <a class="random" title="{'random'|@translate}"><img src="{$CRYPTO_PATH}/template/arrow_switch.png"></a>
       </li>
       <li>
         <span class="property">{'Font'|@translate}</span>

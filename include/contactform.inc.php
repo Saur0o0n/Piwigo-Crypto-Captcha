@@ -1,6 +1,7 @@
 <?php
 if (!defined('PHPWG_ROOT_PATH')) die('Hacking attempt!');
 
+load_language('plugin.lang', CRYPTO_PATH);
 add_event_handler('display_contactform', 'add_crypto');
 add_event_handler('check_contactform_params', 'check_crypto');
 
@@ -17,23 +18,17 @@ function prefilter_crypto($content, $smarty)
 {
   global $conf;
   
-  $search = '
+  $search = '<td class="contact-form-right"><textarea name="cf_message" id="cf_message" rows="10" cols="40">{$CF.MESSAGE}</textarea></td>';
+  $replace = $search.'
+      </tr>     
       <tr>
-        <td class="contact-form-left">&nbsp;</td>
-        <td class="contact-form-right"><input class="submit" type="submit" value="{\'cf_submit\'|@translate}"></td>
-      </tr>';
-  $replace = '     
-    <tr>
-      <td class="contact-form-left" style="vertical-align:top;">
-        {\''.($conf['cryptographp']['captcha_type']=='string'?'Enter code':'Solve equation').'\'|@translate}
-        <img id="captcha" src="'.CRYPTO_PATH.'securimage/securimage_show.php" alt="CAPTCHA Image">
-      </td>
-      <td class="contact-form-right"><input type="text" name="captcha_code" size="'.($conf['cryptographp']['code_length']+1).'" maxlength="'.$conf['cryptographp']['code_length'].'" />
-        <a href="#" onclick="document.getElementById(\'captcha\').src = \''.CRYPTO_PATH.'securimage/securimage_show.php?\' + Math.random(); return false">
-          <img src="'.CRYPTO_PATH.'template/refresh.png"></a>
-      </td>
-    </tr>'
-  ."\n".$search;
+        <td class="contact-form-left" style="vertical-align:top;">
+          {\''.($conf['cryptographp']['captcha_type']=='string'?'Enter code':'Solve equation').'\'|@translate}
+          <img id="captcha" src="'.CRYPTO_PATH.'securimage/securimage_show.php" alt="CAPTCHA Image">
+          <a href="#" onclick="document.getElementById(\'captcha\').src = \''.CRYPTO_PATH.'securimage/securimage_show.php?\' + Math.random(); return false">
+            <img src="'.CRYPTO_PATH.'template/refresh.png"></a>
+        </td>
+        <td class="contact-form-right"><input type="text" name="captcha_code" size="'.($conf['cryptographp']['code_length']+1).'" maxlength="'.$conf['cryptographp']['code_length'].'" /></td>';
   
   return str_replace($search, $replace, $content);
 }
