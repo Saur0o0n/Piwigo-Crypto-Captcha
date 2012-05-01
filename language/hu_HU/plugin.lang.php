@@ -25,4 +25,5 @@ $lang['Simple equation'] = 'Egyszerű művelet';
 $lang['Solve equation'] = 'Művelet eredménye';
 $lang['Text color'] = 'Szövegszín';
 $lang['Tip: type "random" on a color field to have a random color'] = 'Tipp: A "random" kifejezés használata bármely szín mezőben az adott mező véletlen színét eredményezi.';
+$lang['random'] = 'véletlen';
 ?>
