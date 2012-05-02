@@ -25,4 +25,5 @@ $lang['Simple equation'] = 'jednoduchá rovnice';
 $lang['Solve equation'] = 'vyřeš rovnici';
 $lang['Text color'] = 'barva textu';
 $lang['Tip: type "random" on a color field to have a random color'] = 'tip: napsáním textu "random" do políček Barva vygeneruje náhodnou barvu';
+$lang['random'] = 'náhodné';
 ?>
