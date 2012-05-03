@@ -25,4 +25,5 @@ $lang['Text color'] = 'Colore del testo';
 $lang['Tip: type "random" on a color field to have a random color'] = 'Consiglio: scrivi "random" nel campo colore per avere un colore casuale';
 $lang['Perturbation'] = 'Disturbo';
 $lang['range:'] = 'range:';
+$lang['random'] = 'casuale';
 ?>
