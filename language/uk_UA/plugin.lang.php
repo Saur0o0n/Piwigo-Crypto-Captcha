@@ -44,4 +44,5 @@ $lang['range:'] = 'діапазон:';
 $lang['Simple equation'] = 'Просте рівняння';
 $lang['Text color'] = 'Колір тексту';
 $lang['Tip: type "random" on a color field to have a random color'] = 'Підказка: введіть "random" в полі кольору, щоб колір був випадковим';
+$lang['random'] = 'випадковий';
 ?>
