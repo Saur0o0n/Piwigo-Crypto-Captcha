@@ -25,4 +25,5 @@ $lang['Simple equation'] = 'Ecuación simple';
 $lang['Solve equation'] = 'Resolver ecuación';
 $lang['Text color'] = 'Color del texto';
 $lang['Tip: type "random" on a color field to have a random color'] = 'Consejo: escribe "random" en un cuadro de color para obtener un color aleatorio';
+$lang['random'] = 'aleatorio';
 ?>
