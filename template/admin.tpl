@@ -221,10 +221,8 @@ function changeColor(target, color) {
     {'Tip: type "random" on a color field to have a random color'|@translate}
   </fieldset>
   
-  <p class="bottomButtons">
-    <input class="submit" type="submit" value="{'Submit'|@translate}" name="submit">
-  </p>
 </fieldset>
+<p><input class="submit" type="submit" value="{'Submit'|@translate}" name="submit"></p>
 </form>
 
 <div style="text-align:right;">

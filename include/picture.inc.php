@@ -38,15 +38,12 @@ function check_crypto($action, $comment)
   include_once(CRYPTO_PATH.'securimage/securimage.php');
   $securimage = new Securimage();
 
-  if ( $action == 'reject' or $action == $conf['cryptographp']['comments_action'] or !is_a_guest() )
-  {
-    return $action;
-  }
+  if (!is_a_guest()) return $action;
 
   if ($securimage->check($_POST['captcha_code']) == false)
   {
     if ($conf['cryptographp']['comments_action'] == 'reject') array_push($page['errors'], l10n('Invalid Captcha'));
-    return $conf['cryptographp']['comments_action'];
+    return ($action != 'reject') ? $conf['cryptographp']['comments_action'] : 'reject';
   }
 
   return $action;
