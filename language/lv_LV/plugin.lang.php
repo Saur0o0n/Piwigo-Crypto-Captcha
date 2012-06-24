@@ -4,7 +4,6 @@ $lang['Invalid Captcha'] = 'Nederīgs Captcha';
 $lang['Captcha theme'] = 'Captcha tēma';
 $lang['Comments action'] = 'Darbība ar komentāriem';
 $lang['Moderate'] = 'Apmierinošs';
-$lang['No captcha'] = 'Nav captcha';
 
 $lang['Background color'] = 'Fona krāsa';
 $lang['Captcha type'] = 'Captcha tips';

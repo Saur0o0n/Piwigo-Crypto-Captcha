@@ -6,7 +6,6 @@ $lang['Solve equation'] = 'Resolvez l\'équation';
 
 $lang['Comments action'] = 'Action pour les commentaires';
 $lang['Moderate'] = 'Modérer';
-$lang['No captcha'] = 'Pas de captcha';
 $lang['Captcha type'] = 'Type de captcha';
 $lang['Random string'] = 'Code aléatoire';
 $lang['Simple equation'] = 'Equation simple';
@@ -14,6 +13,12 @@ $lang['Case sensitive'] = 'Sensibilité à la case';
 $lang['Code lenght'] = 'Longueur du code';
 $lang['good value:'] = 'conseillé:';
 $lang['Captcha theme'] = 'Thème du captcha';
+$lang['Activate on'] = 'Activer sur';
+$lang['Picture comments'] = 'Commentaires photo';
+$lang['Album comments'] = 'Commentaire album';
+$lang['Register form'] = 'Formulaire d\'enregistrement';
+$lang['Contact form'] = 'Formulaire de contact';
+$lang['Guestbook'] = 'Livre d\'or';
 
 $lang['Perturbation'] = 'Perturbation';
 $lang['range:'] = 'plage:';

@@ -1,12 +1,25 @@
 <?php
 if (!defined('PHPWG_ROOT_PATH')) die('Hacking attempt!');
 
+global $pwg_loaded_plugins;
+$loaded = array();
+if (isset($pwg_loaded_plugins['ContactForm'])) $loaded['contactform'] = true;
+if (isset($pwg_loaded_plugins['Comments_on_Albums'])) $loaded['category'] = true;
+if (isset($pwg_loaded_plugins['GuestBook'])) $loaded['guestbook'] = true;
+
 // $conf['cryptographp'] = unserialize($conf['cryptographp']);
 load_language('plugin.lang', CRYPTO_PATH);
 
 if ( isset($_POST['submit']))
 {
   $conf['cryptographp'] = array(
+    'activate_on'     => array(
+          'picture'     => isset($_POST['activate_on']['picture']),
+          'category'    => isset($_POST['activate_on']['category']) || !isset($loaded['category']),
+          'register'    => isset($_POST['activate_on']['register']),
+          'contactform' => isset($_POST['activate_on']['contactform']) || !isset($loaded['contactform']),
+          'guestbook'   => isset($_POST['activate_on']['guestbook']) || !isset($loaded['guestbook']),
+          ),
     'comments_action' => $_POST['comments_action'],
     'theme'           => $_POST['theme'],
     'captcha_type'    => $_POST['captcha_type'],
@@ -72,16 +85,16 @@ function apply_'.$name.'() {
   return $out;
 }
 
-$template->set_filename('plugin_admin_content', dirname(__FILE__).'/template/admin.tpl');
-
 $template->assign(array(
   'crypto' => $conf['cryptographp'],
+  'loaded' => $loaded,
   'fonts' => list_fonts(CRYPTO_PATH.'securimage/fonts'),
   'presets' => array_keys($presets),
   'PRESETS_FUNC' => presets_to_js($presets),
   'CRYPTO_PATH' => CRYPTO_PATH,
   ));
 
+$template->set_filename('plugin_admin_content', dirname(__FILE__).'/template/admin.tpl');
 $template->assign_var_from_handle('ADMIN_CONTENT', 'plugin_admin_content');
 
 ?>

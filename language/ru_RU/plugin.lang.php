@@ -32,7 +32,6 @@ $lang['Invalid Captcha'] = 'Неверная Каптча';
 $lang['Lines color'] = 'Цвет линий';
 $lang['Lines density'] = 'Плотность линий';
 $lang['Moderate'] = 'Проверить';
-$lang['No captcha'] = 'Каптча отсутствует';
 $lang['Noise color'] = 'Цветной шум';
 $lang['Noise level'] = 'Уровень шума';
 $lang['Perturbation'] = 'Пертурбация';

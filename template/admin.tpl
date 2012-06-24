@@ -127,10 +127,17 @@ function changeColor(target, color) {
 <fieldset>
   <legend>{'Configuration'|@translate}</legend>
   
-  <ul>			
+  <ul>
+    <li>
+      <span class="property">{'Activate on'|@translate}</span>
+      <label><input type="checkbox" name="activate_on[picture]" value="1" {if $crypto.activate_on.picture}checked="checked"{/if}> {'Picture comments'|@translate}</label>
+      {if $loaded.category}<label><input type="checkbox" name="activate_on[category]" value="1" {if $crypto.activate_on.category}checked="checked"{/if}> {'Album comments'|@translate}</label>{/if}
+      <label><input type="checkbox" name="activate_on[register]" value="1" {if $crypto.activate_on.register}checked="checked"{/if}> {'Register form'|@translate}</label>
+      {if $loaded.contactform}<label><input type="checkbox" name="activate_on[contactform]" value="1" {if $crypto.activate_on.contactform}checked="checked"{/if}> {'Contact form'|@translate}</label>{/if}
+      {if $loaded.guestbook}<label><input type="checkbox" name="activate_on[guestbook]" value="1" {if $crypto.activate_on.guestbook}checked="checked"{/if}> {'Guestbook'|@translate}</label>{/if}
+    </li>
     <li>
       <span class="property">{'Comments action'|@translate}</span>
-      <label><input type="radio" name="comments_action" value="inactive" {if $crypto.comments_action == 'inactive'}checked="checked"{/if}> {'No captcha'|@translate}</label>
       <label><input type="radio" name="comments_action" value="reject" {if $crypto.comments_action == 'reject'}checked="checked"{/if}> {'Reject'|@translate}</label>
       <label><input type="radio" name="comments_action" value="moderate" {if $crypto.comments_action == 'moderate'}checked="checked"{/if}> {'Moderate'|@translate}</label>
     </li>
@@ -150,11 +157,11 @@ function changeColor(target, color) {
     </li>
     <li>
       <span class="property">{'Width'|@translate}</span>
-      <label><input type="text" name="width" class="preview" value="{$crypto.width}" size="6" maxlength="3"> {'good value:'|@translate} lenght&times;20</label>
+      <label><input type="text" name="width" class="preview" value="{$crypto.width}" size="6" maxlength="3"> {'good value:'|@translate} lenght&times;30</label>
     </li>
     <li>
       <span class="property">{'Height'|@translate}</span>
-      <label><input type="text" name="height" class="preview" value="{$crypto.height}" size="6" maxlength="3"> {'good value:'|@translate} width/4</label>
+      <label><input type="text" name="height" class="preview" value="{$crypto.height}" size="6" maxlength="3"> {'good value:'|@translate} lenght&times;12</label>
     </li>
     <li>
       <span class="property">{'Captcha theme'|@translate}</span>

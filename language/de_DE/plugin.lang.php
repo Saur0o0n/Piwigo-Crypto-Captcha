@@ -32,7 +32,6 @@ $lang['Invalid Captcha'] = 'Unzulässiger Captcha';
 $lang['Lines color'] = 'Linien Farbe';
 $lang['Lines density'] = 'Linien Dichte';
 $lang['Moderate'] = 'Moderate';
-$lang['No captcha'] = 'Kein Captcha';
 $lang['Noise color'] = 'Rauschfarbe';
 $lang['Noise level'] = 'Rauschpegel';
 $lang['Perturbation'] = 'Störung';

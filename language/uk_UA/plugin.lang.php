@@ -25,7 +25,6 @@ $lang['Comments action'] = 'Коментарі дій';
 $lang['Enter code'] = 'Введіть код';
 $lang['Invalid Captcha'] = 'Невірна каптча';
 $lang['Moderate'] = 'Перевірити';
-$lang['No captcha'] = 'Немає капчі';
 $lang['Random string'] = 'Випадковий рядок';
 $lang['Solve equation'] = 'Вирішіть рівняння';
 $lang['Background color'] = 'Колір фону';

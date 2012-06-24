@@ -32,26 +32,32 @@ function crypto_init()
   
   $conf['cryptographp'] = unserialize($conf['cryptographp']);
   
-  if (script_basename() == 'register')
+  if (script_basename() == 'register' and $conf['cryptographp']['activate_on']['register'])
   {
     include(CRYPTO_PATH.'include/register.inc.php');
   }
-  else if (script_basename() == 'picture' and $conf['cryptographp']['comments_action'] != 'inactive')
+  else if (script_basename() == 'picture' and $conf['cryptographp']['activate_on']['picture'])
   {
     include(CRYPTO_PATH.'include/picture.inc.php');
   }
-  else if (isset($_GET['/contact'])) 
+  else if (isset($_GET['/contact']) and $conf['cryptographp']['activate_on']['contactform']) 
   {
     include(CRYPTO_PATH.'include/contactform.inc.php');
+  }
+  else if (isset($_GET['/guestbook']) and $conf['cryptographp']['activate_on']['guestbook']) 
+  {
+    include(CRYPTO_PATH.'include/guestbook.inc.php');
   }
 }
 
 function crypto_section_init()
 {
-  global $conf, $pwg_loaded_plugins, $page;
+  global $conf, $pwg_loaded_plugins, $page, $user;
+  
+  if ($user['theme'] == 'smartpocket') return;
   
   if (
-    script_basename() == 'index' and $conf['cryptographp']['comments_action'] != 'inactive' and 
+    script_basename() == 'index' and $conf['cryptographp']['activate_on']['category'] and 
     isset($pwg_loaded_plugins['Comments_on_Albums']) and isset($page['section']) and 
     $page['section'] == 'categories' and isset($page['category'])
     ) 
