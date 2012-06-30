@@ -44,4 +44,10 @@ $lang['Simple equation'] = 'Просте рівняння';
 $lang['Text color'] = 'Колір тексту';
 $lang['Tip: type "random" on a color field to have a random color'] = 'Підказка: введіть "random" в полі кольору, щоб колір був випадковим';
 $lang['random'] = 'випадковий';
+$lang['Activate on'] = 'Активовано';
+$lang['Album comments'] = 'Коментарі до альбому';
+$lang['Contact form'] = 'Контакт з';
+$lang['Guestbook'] = 'Гостьова книга';
+$lang['Picture comments'] = 'Коментарі до зображення';
+$lang['Register form'] = 'Зареєстровано з';
 ?>
