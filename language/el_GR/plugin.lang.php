@@ -25,4 +25,10 @@ $lang['Tip: type "random" on a color field to have a random color'] = 'Συμβ�
 $lang['good value:'] = 'καλή τιμή:';
 $lang['random'] = 'τυχαία';
 $lang['range:'] = 'σειρά:';
+$lang['Activate on'] = 'Ενεργοποίηση για';
+$lang['Album comments'] = 'Σχόλια λευκώματος';
+$lang['Contact form'] = 'Φόρμα επικοινωνίας';
+$lang['Guestbook'] = 'Βιβλίο Επισκεπτών';
+$lang['Picture comments'] = 'Σχόλια εικόνας';
+$lang['Register form'] = 'Φόρμα Εγγραφής';
 ?>
