@@ -2,7 +2,7 @@
 define('crypto_default_config', serialize(array(
   'activate_on'     => array(
         'picture'     => true,
-        'catgeory'    => true,
+        'category'    => true,
         'register'    => true,
         'contactform' => true,
         'guestbook'   => true,
