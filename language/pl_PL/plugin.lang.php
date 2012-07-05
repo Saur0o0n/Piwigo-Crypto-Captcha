@@ -25,4 +25,10 @@ $lang['Solve equation'] = 'Rozwiąż równanie';
 $lang['Text color'] = 'Kolor tekstu';
 $lang['Tip: type "random" on a color field to have a random color'] = 'Podpowiedź: wpisz "random" w polu koloru, aby otrzymać losowy kolor';
 $lang['random'] = 'losowy';
+$lang['Activate on'] = 'Aktywuj dla';
+$lang['Album comments'] = 'Komentarze albumu';
+$lang['Contact form'] = 'Formularz kontaktowy';
+$lang['Guestbook'] = 'Księga gości';
+$lang['Picture comments'] = 'Komentarze zdjęć';
+$lang['Register form'] = 'Formularz rejestracyjny';
 ?>
