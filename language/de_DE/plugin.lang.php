@@ -44,4 +44,10 @@ $lang['Tip: type "random" on a color field to have a random color'] = 'Tipp: Geb
 $lang['good value:'] = 'guter Wert';
 $lang['range:'] = 'Bereich';
 $lang['random'] = 'zufällig';
+$lang['Activate on'] = 'Aktivierung EIN';
+$lang['Album comments'] = 'Album Inhalte';
+$lang['Contact form'] = 'Kontakt Formular';
+$lang['Guestbook'] = 'Gästebuch';
+$lang['Picture comments'] = 'Bilder Kommentare';
+$lang['Register form'] = 'Registrierungs-Formular ';
 ?>

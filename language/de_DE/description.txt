@@ -1,1 +1,1 @@
-F&uuml;gen Sie eine CAPTCHA Abfrage zur Registrieren-Seite, Kommentar-Seite und zum Kontakt-Formular hinzu. (Dank an P @ t)
+Mit "Crypto Captcha" fügen Sie eine CAPTCHA Abfrage zur Registrierungs-Seite, Kommentar-Seite und zum Kontakt-Formular hinzu. (Dank an P @ t)
