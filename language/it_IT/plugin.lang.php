@@ -25,4 +25,10 @@ $lang['Tip: type "random" on a color field to have a random color'] = 'Consiglio
 $lang['Perturbation'] = 'Disturbo';
 $lang['range:'] = 'range:';
 $lang['random'] = 'casuale';
+$lang['Activate on'] = 'Attiva su';
+$lang['Album comments'] = 'Commenti album';
+$lang['Contact form'] = 'Modulo contatti';
+$lang['Guestbook'] = 'Libro ospiti';
+$lang['Picture comments'] = 'Commenti immagini';
+$lang['Register form'] = 'Modulo registrazione';
 ?>
