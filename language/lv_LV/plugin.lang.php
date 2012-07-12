@@ -25,4 +25,9 @@ $lang['Tip: type "random" on a color field to have a random color'] = 'Ieteikums
 $lang['good value:'] = 'labvērtība:';
 $lang['random'] = 'gadījuma';
 $lang['range:'] = 'diapazons:';
+$lang['Activate on'] = 'Aktivēt uz';
+$lang['Album comments'] = 'Albūma komentāri';
+$lang['Contact form'] = 'Kontaktforma';
+$lang['Guestbook'] = 'Viesu grāmata';
+$lang['Picture comments'] = 'Attēla komentāri';
 ?>
