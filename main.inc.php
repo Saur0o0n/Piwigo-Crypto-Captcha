@@ -21,7 +21,7 @@ if (!defined('PHPWG_ROOT_PATH')) die('Hacking attempt!');
 define('CRYPTO_PATH' , PHPWG_PLUGINS_PATH . basename(dirname(__FILE__)) . '/');
 
 add_event_handler('init', 'crypto_init');
-add_event_handler('loc_end_section_init', 'crypto_section_init');
+add_event_handler('loc_end_section_init', 'crypto_section_init', EVENT_HANDLER_PRIORITY_NEUTRAL+30);
 
 function crypto_init()
 {
@@ -40,14 +40,7 @@ function crypto_init()
   {
     include(CRYPTO_PATH.'include/picture.inc.php');
   }
-  else if (isset($_GET['/contact']) and $conf['cryptographp']['activate_on']['contactform']) 
-  {
-    include(CRYPTO_PATH.'include/contactform.inc.php');
-  }
-  else if (isset($_GET['/guestbook']) and $conf['cryptographp']['activate_on']['guestbook']) 
-  {
-    include(CRYPTO_PATH.'include/guestbook.inc.php');
-  }
+  
 }
 
 function crypto_section_init()
@@ -63,6 +56,14 @@ function crypto_section_init()
     ) 
   {
     include(CRYPTO_PATH.'include/category.inc.php');
+  }
+  else if ( preg_match('#contact$#', $_SERVER['REQUEST_URI']) and $conf['cryptographp']['activate_on']['contactform']) 
+  {
+    include(CRYPTO_PATH.'include/contactform.inc.php');
+  }
+  else if (isset($page['section']) and $page['section'] == 'guestbook' and $conf['cryptographp']['activate_on']['guestbook']) 
+  {
+    include(CRYPTO_PATH.'include/guestbook.inc.php');
   }
 }
 

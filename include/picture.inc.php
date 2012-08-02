@@ -18,13 +18,13 @@ function prefilter_crypto($content, $smarty)
 {
   global $conf;
   
-  $search = '<p><textarea name="content" id="contentid" rows="5" cols="50">{$comment_add.CONTENT}</textarea></p>';
+  $search = '{$comment_add.CONTENT}</textarea></p>';
   $replace = $search.'
 				<p><label>{\''.($conf['cryptographp']['captcha_type']=='string'?'Enter code':'Solve equation').'\'|@translate} :</label></p>
 				<p>
-				  <img id="captcha" src="'.CRYPTO_PATH.'securimage/securimage_show.php" alt="CAPTCHA Image">
-				  <a href="#" onclick="document.getElementById(\'captcha\').src = \''.CRYPTO_PATH.'securimage/securimage_show.php?\' + Math.random(); return false">
-				    <img src="'.CRYPTO_PATH.'template/refresh.png"></a>
+				  <img id="captcha" src="{$ROOT_URL}'.CRYPTO_PATH.'securimage/securimage_show.php" alt="CAPTCHA Image">
+				  <a href="#" onclick="document.getElementById(\'captcha\').src = \'{$ROOT_URL}'.CRYPTO_PATH.'securimage/securimage_show.php?\' + Math.random(); return false">
+				    <img src="{$ROOT_URL}'.CRYPTO_PATH.'template/refresh.png"></a>
           <input type="text" name="captcha_code" style="width:'.$conf['cryptographp']['code_length'].'em;" maxlength="'.$conf['cryptographp']['code_length'].'" />
 				</p>';
 

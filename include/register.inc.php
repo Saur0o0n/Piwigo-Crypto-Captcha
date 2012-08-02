@@ -22,8 +22,8 @@ function prefilter_crypto($content, $smarty)
       <li>
         <span class="property">
           <label for="captcha_code">{\''.($conf['cryptographp']['captcha_type']=='string'?'Enter code':'Solve equation').'\'|@translate} <img id="captcha" src="'.CRYPTO_PATH.'securimage/securimage_show.php" alt="CAPTCHA Image"></label>
-          <a href="#" onclick="document.getElementById(\'captcha\').src = \''.CRYPTO_PATH.'securimage/securimage_show.php?\' + Math.random(); return false">
-            <img src="'.CRYPTO_PATH.'template/refresh.png"></a>
+          <a href="#" onclick="document.getElementById(\'captcha\').src = \'{$ROOT_URL}'.CRYPTO_PATH.'securimage/securimage_show.php?\' + Math.random(); return false">
+            <img src="{$ROOT_URL}'.CRYPTO_PATH.'template/refresh.png"></a>
         </span>
         <input type="text" id="captcha_code" name="captcha_code" size="'.($conf['cryptographp']['code_length']+1).'" maxlength="'.$conf['cryptographp']['code_length'].'" />';
 
