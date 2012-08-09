@@ -57,7 +57,7 @@ function crypto_section_init()
   {
     include(CRYPTO_PATH.'include/category.inc.php');
   }
-  else if ( preg_match('#contact$#', $_SERVER['REQUEST_URI']) and $conf['cryptographp']['activate_on']['contactform']) 
+  else if ( preg_match('#contact/?$#', $_SERVER['REQUEST_URI']) and $conf['cryptographp']['activate_on']['contactform']) 
   {
     include(CRYPTO_PATH.'include/contactform.inc.php');
   }
