@@ -27,4 +27,10 @@ $lang['Captcha theme'] = 'Captcha theme';
 $lang['Captcha type'] = 'Captcha type';
 $lang['Case sensitive'] = 'Hoofdletter gevoelig';
 $lang['Code lenght'] = 'Lengte code';
+$lang['Random string'] = 'willekeurige  ';
+$lang['Text color'] = 'Tekst kleur';
+$lang['Guestbook'] = 'Gastenboek';
+$lang['Font'] = 'Lettertype';
+$lang['Enter code'] = 'Voer code in';
+$lang['Contact form'] = 'Contact formulier';
 ?>
