@@ -50,4 +50,5 @@ $lang['Noise color'] = 'Støjfarve';
 $lang['Noise level'] = 'Støjniveau';
 $lang['Perturbation'] = 'Uro';
 $lang['Picture comments'] = 'Billedkommentarer';
+$lang['Button color'] = 'Knapfarve';
 ?>
