@@ -27,17 +27,19 @@ function crypto_init()
 {
   global $conf, $user;
   
-  // brace yourself, smartphones spammers are comming !
-  if ($user['theme'] == 'smartpocket') return;
-  
   $conf['cryptographp'] = unserialize($conf['cryptographp']);
+  
+  if (!is_a_guest()) return;
+  if ($user['theme'] == 'smartpocket') return;
   
   if (script_basename() == 'register' and $conf['cryptographp']['activate_on']['register'])
   {
+    $conf['cryptographp']['template'] = 'register';
     include(CRYPTO_PATH.'include/register.inc.php');
   }
   else if (script_basename() == 'picture' and $conf['cryptographp']['activate_on']['picture'])
   {
+    $conf['cryptographp']['template'] = 'comment';
     include(CRYPTO_PATH.'include/picture.inc.php');
   }
   
@@ -47,6 +49,7 @@ function crypto_section_init()
 {
   global $conf, $pwg_loaded_plugins, $page, $user;
   
+  if (!is_a_guest()) return;
   if ($user['theme'] == 'smartpocket') return;
   
   if (
@@ -55,14 +58,17 @@ function crypto_section_init()
     $page['section'] == 'categories' and isset($page['category'])
     ) 
   {
+    $conf['cryptographp']['template'] = 'comment';
     include(CRYPTO_PATH.'include/category.inc.php');
   }
   else if ( preg_match('#contact/?$#', $_SERVER['REQUEST_URI']) and $conf['cryptographp']['activate_on']['contactform']) 
   {
+    $conf['cryptographp']['template'] = 'contactform';
     include(CRYPTO_PATH.'include/contactform.inc.php');
   }
   else if (isset($page['section']) and $page['section'] == 'guestbook' and $conf['cryptographp']['activate_on']['guestbook']) 
   {
+    $conf['cryptographp']['template'] = 'comment';
     include(CRYPTO_PATH.'include/guestbook.inc.php');
   }
 }

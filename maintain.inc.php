@@ -22,6 +22,7 @@ define('crypto_default_config', serialize(array(
   'noise_level'     => 0.1, 
   'noise_color'     => '8a8a8a', 
   'ttf_file'        => 'TopSecret',
+  'button_color'    => 'dark',
 )));
 
 function plugin_install()
@@ -56,6 +57,11 @@ function plugin_activate()
         'contactform' => true,
         'guestbook'   => true,
         );
+      conf_update_param('cryptographp', serialize($conf['cryptographp']));
+    }
+    if (!isset($conf['cryptographp']['button_color']))
+    {
+      $conf['cryptographp']['button_color'] = 'dark';
       conf_update_param('cryptographp', serialize($conf['cryptographp']));
     }
   }

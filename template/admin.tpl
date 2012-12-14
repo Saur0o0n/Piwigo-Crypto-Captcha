@@ -28,6 +28,14 @@ jQuery(document).ready(function() {
       changeColor(this, $(this).val());
     });
   
+  // change button
+  $('.button').click(function() {
+    $('.button').removeClass('selected');
+    $(this).addClass('selected');
+    $('input[name=button_color]').val($(this).attr('title'));
+    $('#reload').attr('src', '{/literal}{$CRYPTO_PATH}{literal}template/refresh_'+ $(this).attr('title') +'.png');
+  });
+  
   // apply a preset
   $('.preset').click(function() {
     $('.preset').removeClass('selected');
@@ -52,7 +60,7 @@ jQuery(document).ready(function() {
   $('input.istheme, input.preview').change(function() {
     changePreview();
   });
-  $('#captcha').click(function() {
+  $('#reload').click(function() {
     changePreview();
   });
   
@@ -108,12 +116,12 @@ function changeColor(target, color) {
 }
 {/foreach}
 
-.preset img {ldelim}
+.preset img, .button img {ldelim}
   margin:1px;
   padding:3px;
   border:1px solid #999;
 }
-.preset.selected img {ldelim}
+.preset.selected img, .button.selected img {ldelim}
   border-color:#f70;
 }
 </style>
@@ -162,6 +170,14 @@ function changeColor(target, color) {
     <li>
       <span class="property">{'Height'|@translate}</span>
       <label><input type="text" name="height" class="preview" value="{$crypto.height}" size="6" maxlength="3"> {'good value:'|@translate} lenght&times;12</label>
+    </li>
+    <li>
+      <span class="property">{'Button color'|@translate}</span>
+      <div style="display:relative;margin-left:51%;">
+        <a class="button {if $crypto.button_color == 'dark'}selected{/if}" title="dark"><img src="{$CRYPTO_PATH}template/refresh_dark.png" alt="dark"></a>
+        <a class="button {if $crypto.button_color == 'light'}selected{/if}" title="light"><img src="{$CRYPTO_PATH}template/refresh_light.png" alt="light"></a>
+        <input type="hidden" name="button_color" value="{$crypto.button_color}">
+      </div>
     </li>
     <li>
       <span class="property">{'Captcha theme'|@translate}</span>
@@ -218,15 +234,18 @@ function changeColor(target, color) {
           {/foreach}
         </div>
       </li>
-      
-      <li>
-        <span class="property">{'Preview'|@translate}</span>
-        <label><img id="captcha" src="{$CRYPTO_PATH}securimage/securimage_show.php" alt="CAPTCHA Image"></label>
-      </li>
     </ul>
     
     {'Tip: type "random" on a color field to have a random color'|@translate}
   </fieldset>
+  
+  <ul style="margin-top:30px;">
+    <li>
+      <span class="property">{'Preview'|@translate}</span>
+      <img id="captcha" src="{$CRYPTO_PATH}securimage/securimage_show.php" alt="CAPTCHA Image">
+      <a href="#" onClick="return false;"><img id="reload" src="{$CRYPTO_PATH}template/refresh_{$crypto.button_color}.png"></a>
+    </li>
+  </ul>
   
 </fieldset>
 <p><input class="submit" type="submit" value="{'Submit'|@translate}" name="submit"></p>

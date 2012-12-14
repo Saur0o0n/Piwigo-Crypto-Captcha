@@ -43,12 +43,9 @@
  *
  */
 
-// error_reporting(E_ALL); ini_set('display_errors', 1); // uncomment this line for debugging
-
 define('PHPWG_ROOT_PATH','../../../');
 include_once(PHPWG_ROOT_PATH.'include/common.inc.php');
 
-// $conf['cryptographp'] = unserialize($conf['cryptographp']);
 
 // randomize colors
 function randomColor()
@@ -66,6 +63,7 @@ foreach (array('image_bg_color','text_color','line_color','noise_color') as $col
 {
   if ($conf['cryptographp'][$color] == 'random') $conf['cryptographp'][$color] = randomColor();
 }
+
 
 require_once dirname(__FILE__) . '/securimage.php';
 $img = new securimage();

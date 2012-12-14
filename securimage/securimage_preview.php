@@ -8,6 +8,7 @@ include_once(PHPWG_ROOT_PATH.'include/common.inc.php');
 
 if (!is_admin()) die('Hacking attempt!');
 
+
 $temp_conf = array(
   'captcha_type'    => $_GET['captcha_type'],
   'width'           => (int)$_GET['width'], 
@@ -23,6 +24,7 @@ $temp_conf = array(
   'ttf_file'        => $_GET['ttf_file'],
   );
 
+  
 // randomize colors
 function randomColor()
 {
@@ -39,6 +41,7 @@ foreach (array('image_bg_color','text_color','line_color','noise_color') as $col
 {
   if ($temp_conf[$color] == 'random') $temp_conf[$color] = randomColor();
 }
+
 
 require_once dirname(__FILE__) . '/securimage.php';
 $img = new securimage();

@@ -2,23 +2,25 @@
 if (!defined('PHPWG_ROOT_PATH')) die('Hacking attempt!');
 
 global $pwg_loaded_plugins;
-$loaded = array();
-if (isset($pwg_loaded_plugins['ContactForm'])) $loaded['contactform'] = true;
-if (isset($pwg_loaded_plugins['Comments_on_Albums'])) $loaded['category'] = true;
-if (isset($pwg_loaded_plugins['GuestBook'])) $loaded['guestbook'] = true;
+$loaded = array(
+  'contactform' => isset($pwg_loaded_plugins['ContactForm']),
+  'category' => isset($pwg_loaded_plugins['Comments_on_Albums']),
+  'guestbook' => isset($pwg_loaded_plugins['GuestBook']),
+  );
 
-// $conf['cryptographp'] = unserialize($conf['cryptographp']);
+
 load_language('plugin.lang', CRYPTO_PATH);
 
+
 if ( isset($_POST['submit']))
-{
+{  
   $conf['cryptographp'] = array(
     'activate_on'     => array(
           'picture'     => isset($_POST['activate_on']['picture']),
-          'category'    => isset($_POST['activate_on']['category']) || !isset($loaded['category']),
+          'category'    => isset($_POST['activate_on']['category']) || !$loaded['category'],
           'register'    => isset($_POST['activate_on']['register']),
-          'contactform' => isset($_POST['activate_on']['contactform']) || !isset($loaded['contactform']),
-          'guestbook'   => isset($_POST['activate_on']['guestbook']) || !isset($loaded['guestbook']),
+          'contactform' => isset($_POST['activate_on']['contactform']) || !$loaded['contactform'],
+          'guestbook'   => isset($_POST['activate_on']['guestbook']) || !$loaded['guestbook'],
           ),
     'comments_action' => $_POST['comments_action'],
     'theme'           => $_POST['theme'],
@@ -35,6 +37,7 @@ if ( isset($_POST['submit']))
     'noise_level'     => (float)$_POST['noise_level'],
     'noise_color'     => $_POST['noise_color'],
     'ttf_file'        => $_POST['ttf_file'],
+    'button_color'    => $_POST['button_color'],
     );
   
   conf_update_param('cryptographp', serialize($conf['cryptographp']));

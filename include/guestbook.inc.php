@@ -1,34 +1,20 @@
 <?php
 if (!defined('PHPWG_ROOT_PATH')) die('Hacking attempt!');
 
-load_language('plugin.lang', CRYPTO_PATH);
+include(CRYPTO_PATH.'include/common.inc.php');
 add_event_handler('loc_begin_index', 'add_crypto');
 add_event_handler('user_comment_check_guestbook', 'check_crypto', EVENT_HANDLER_PRIORITY_NEUTRAL, 2);
 
 function add_crypto()
 {
   global $template;
-  
-  if (!is_a_guest()) return;
-  
   $template->set_prefilter('index', 'prefilter_crypto');
 }
 
 function prefilter_crypto($content, $smarty)
 {
-  global $conf;
-  
   $search = '{$comment_add.CONTENT}</textarea></p>';
-  $replace = $search.'
-				<p><label>{\''.($conf['cryptographp']['captcha_type']=='string'?'Enter code':'Solve equation').'\'|@translate} :</label></p>
-				<p>
-				  <img id="captcha" src="{$ROOT_URL}'.CRYPTO_PATH.'securimage/securimage_show.php" alt="CAPTCHA Image">
-				  <a href="#" onclick="document.getElementById(\'captcha\').src = \'{$ROOT_URL}'.CRYPTO_PATH.'securimage/securimage_show.php?\' + Math.random(); return false">
-				    <img src="{$ROOT_URL}'.CRYPTO_PATH.'template/refresh.png"></a>
-          <input type="text" name="captcha_code" style="width:'.$conf['cryptographp']['code_length'].'em;" maxlength="'.$conf['cryptographp']['code_length'].'" />
-				</p>';
-
-  return str_replace($search, $replace, $content);
+  return str_replace($search, $search."\n{\$CRYPTOGRAPHP}", $content);
 }
 
 function check_crypto($action, $comment)

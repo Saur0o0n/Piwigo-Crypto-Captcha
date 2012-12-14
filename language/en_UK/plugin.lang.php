@@ -3,6 +3,7 @@
 $lang['Invalid Captcha'] = 'Invalid Captcha';
 $lang['Enter code'] = 'Enter code';
 $lang['Solve equation'] = 'Solve equation';
+$lang['Button color'] = 'Button color';
 
 $lang['Comments action'] = 'Comments action';
 $lang['Moderate'] = 'Moderate';
