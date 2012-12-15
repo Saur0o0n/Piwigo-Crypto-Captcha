@@ -50,4 +50,5 @@ $lang['Contact form'] = 'Kontakt Formular';
 $lang['Guestbook'] = 'Gästebuch';
 $lang['Picture comments'] = 'Bilder Kommentare';
 $lang['Register form'] = 'Registrierungs-Formular ';
+$lang['Button color'] = 'Tastenfarbe';
 ?>
