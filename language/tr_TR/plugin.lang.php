@@ -50,4 +50,5 @@ $lang['Noise color'] = 'Gürültü rengi';
 $lang['Noise level'] = 'Gürültü seviyesi';
 $lang['Perturbation'] = 'Karışıklık';
 $lang['Picture comments'] = 'Resim yorumları';
+$lang['Button color'] = 'Buton rengi';
 ?>
