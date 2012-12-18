@@ -31,4 +31,5 @@ $lang['Contact form'] = 'Φόρμα επικοινωνίας';
 $lang['Guestbook'] = 'Βιβλίο Επισκεπτών';
 $lang['Picture comments'] = 'Σχόλια εικόνας';
 $lang['Register form'] = 'Φόρμα Εγγραφής';
+$lang['Button color'] = 'χρώμα κουμπιού';
 ?>
