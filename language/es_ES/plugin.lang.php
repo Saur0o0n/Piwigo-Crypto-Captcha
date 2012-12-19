@@ -31,4 +31,5 @@ $lang['Contact form'] = 'Formulario de contacto';
 $lang['Guestbook'] = 'Libro de visitas';
 $lang['Picture comments'] = 'Comentario de imagen';
 $lang['Register form'] = 'Formulario de registro';
+$lang['Button color'] = 'color del botón';
 ?>
