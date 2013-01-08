@@ -50,4 +50,5 @@ $lang['Noise color'] = 'Ruis kleur';
 $lang['Noise level'] = 'Ruis niveau';
 $lang['Lines density'] = 'Regel dichtheid';
 $lang['Invalid Captcha'] = 'Ongeldige Captcha';
+$lang['Button color'] = 'Knopkleur';
 ?>
