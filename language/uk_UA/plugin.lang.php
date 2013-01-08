@@ -50,4 +50,5 @@ $lang['Contact form'] = 'Контакт з';
 $lang['Guestbook'] = 'Гостьова книга';
 $lang['Picture comments'] = 'Коментарі до зображення';
 $lang['Register form'] = 'Зареєстровано з';
+$lang['Button color'] = 'Колір кнопки';
 ?>
