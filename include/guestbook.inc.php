@@ -13,7 +13,7 @@ function add_crypto()
 
 function prefilter_crypto($content, $smarty)
 {
-  $search = '{$comment_add.CONTENT}</textarea></p>';
+  $search = '{$comment_add.CONTENT}</textarea>';
   return str_replace($search, $search."\n{\$CRYPTOGRAPHP}", $content);
 }
 

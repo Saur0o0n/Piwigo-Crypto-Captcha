@@ -1,1 +1,1 @@
-Ajoute un captcha à la page d'enregistrement, au formulaire de commentaire et sur la page de ContactForm (merci à P@t)
+Ajoute un captcha à la page d'enregistrement, aux formulaires de commentaire et sur les pages de ContactForm and GuestBook (merci à P@t)
