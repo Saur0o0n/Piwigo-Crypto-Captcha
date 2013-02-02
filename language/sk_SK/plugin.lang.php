@@ -50,4 +50,5 @@ $lang['Tip: type "random" on a color field to have a random color'] = 'Tip: vpí
 $lang['good value:'] = 'dobrá hodnota:';
 $lang['random'] = 'náhodný';
 $lang['range:'] = 'rozsah:';
+$lang['Button color'] = 'Farba tlačidla';
 ?>
