@@ -31,4 +31,5 @@ $lang['Contact form'] = 'Kontaktní formulář';
 $lang['Guestbook'] = 'Knihu návštěv';
 $lang['Picture comments'] = 'Komentáře k obrázkům';
 $lang['Register form'] = 'Registrační formulář';
+$lang['Button color'] = 'Barva tlačítka';
 ?>
