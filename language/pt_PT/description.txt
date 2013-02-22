@@ -1,0 +1,1 @@
+Adicione um captcha para registo, comentários, páginas Livro de Visitas e Formulário de Contacto
