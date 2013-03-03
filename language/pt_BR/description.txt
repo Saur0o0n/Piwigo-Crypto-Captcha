@@ -1,0 +1,1 @@
+Adicionar um captcha para registrar, comentar, GuestBook e páginas ContactForm
