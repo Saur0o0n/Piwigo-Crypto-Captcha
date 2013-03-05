@@ -8,8 +8,6 @@ Author: Mistic
 Author URI: http://www.strangeplanet.fr
 */
 
-## TODO : add customization of background image
-
 /*
 Author note :
 Le plugin était appellé à l'origine CryptograPHP et utilisait la librairie CryptograPHP
@@ -18,6 +16,11 @@ La version actuelle s'appelle toujours Crypto Captcha mais utilise la librairie 
 */
 
 if (!defined('PHPWG_ROOT_PATH')) die('Hacking attempt!');
+
+if (mobile_theme())
+{
+  return;
+}
 
 defined('CRYPTO_ID') or define('CRYPTO_ID', basename(dirname(__FILE__)));
 define('CRYPTO_PATH' , PHPWG_PLUGINS_PATH . CRYPTO_ID . '/');
