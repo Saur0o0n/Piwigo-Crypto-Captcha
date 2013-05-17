@@ -124,6 +124,15 @@ function changeColor(target, color) {
 .preset.selected img, .button.selected img {ldelim}
   border-color:#f70;
 }
+
+.big-list {ldelim}
+  display:relative;
+  margin-left:51%;
+}
+.big-list label {ldelim}
+  display:inline-block;
+  margin-right:10px;
+}
 </style>
 {/html_head}
 
@@ -138,11 +147,13 @@ function changeColor(target, color) {
   <ul>
     <li>
       <span class="property">{'Activate on'|@translate}</span>
-      <label><input type="checkbox" name="activate_on[picture]" value="1" {if $crypto.activate_on.picture}checked="checked"{/if}> {'Picture comments'|@translate}</label>
-      {if $loaded.category}<label><input type="checkbox" name="activate_on[category]" value="1" {if $crypto.activate_on.category}checked="checked"{/if}> {'Album comments'|@translate}</label>{/if}
-      <label><input type="checkbox" name="activate_on[register]" value="1" {if $crypto.activate_on.register}checked="checked"{/if}> {'Register form'|@translate}</label>
-      {if $loaded.contactform}<label><input type="checkbox" name="activate_on[contactform]" value="1" {if $crypto.activate_on.contactform}checked="checked"{/if}> {'Contact form'|@translate}</label>{/if}
-      {if $loaded.guestbook}<label><input type="checkbox" name="activate_on[guestbook]" value="1" {if $crypto.activate_on.guestbook}checked="checked"{/if}> {'Guestbook'|@translate}</label>{/if}
+      <div class="big-list">
+        <label><input type="checkbox" name="activate_on[picture]" value="1" {if $crypto.activate_on.picture}checked="checked"{/if}> {'Picture comments'|@translate}</label>
+        {if $loaded.category}<label><input type="checkbox" name="activate_on[category]" value="1" {if $crypto.activate_on.category}checked="checked"{/if}> {'Album comments'|@translate}</label>{/if}
+        <label><input type="checkbox" name="activate_on[register]" value="1" {if $crypto.activate_on.register}checked="checked"{/if}> {'Register form'|@translate}</label>
+        {if $loaded.contactform}<label><input type="checkbox" name="activate_on[contactform]" value="1" {if $crypto.activate_on.contactform}checked="checked"{/if}> {'Contact form'|@translate}</label>{/if}
+        {if $loaded.guestbook}<label><input type="checkbox" name="activate_on[guestbook]" value="1" {if $crypto.activate_on.guestbook}checked="checked"{/if}> {'Guestbook'|@translate}</label>{/if}
+        </div>
     </li>
     <li>
       <span class="property">{'Comments action'|@translate}</span>
@@ -228,7 +239,7 @@ function changeColor(target, color) {
       </li>
       <li>
         <span class="property">{'Font'|@translate}</span>
-        <div style="display:relative;margin-left:51%;">
+        <div class="big-list">
           {foreach from=$fonts item=font}
           <label style="font-family:{$font};" title="{$font}"><input type="radio" name="ttf_file" value="{$font}" {if $crypto.ttf_file == $font}checked="checked"{/if} class="istheme"> {$font}</label>
           {/foreach}

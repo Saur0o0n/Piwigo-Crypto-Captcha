@@ -59,7 +59,8 @@ function list_fonts($dir)
   
   while (($file = readdir($dh)) !== false )
   {
-    if ($file !== '.' && $file !== '..') $fonts[] = str_replace('.ttf', null, $file);
+    if ($file !== '.' && $file !== '..' && get_extension($file)=='ttf') 
+      $fonts[] = get_filename_wo_extension($file);
   }
   
   closedir($dh);

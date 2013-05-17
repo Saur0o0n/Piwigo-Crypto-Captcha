@@ -82,7 +82,6 @@ function crypto_document_init()
   global $conf, $user;
   
   if (!is_a_guest()) return;
-  if ($user['theme'] == 'smartpocket') return;
   
   if ( script_basename() == 'register' and $conf['cryptographp']['activate_on']['register'] )
   {
@@ -103,7 +102,6 @@ function crypto_section_init()
   global $conf, $pwg_loaded_plugins, $page, $user;
   
   if (!is_a_guest()) return;
-  if ($user['theme'] == 'smartpocket') return;
   
   if (
     script_basename() == 'index' and $conf['cryptographp']['activate_on']['category'] and 
