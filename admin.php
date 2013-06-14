@@ -16,11 +16,11 @@ if ( isset($_POST['submit']))
 {  
   $conf['cryptographp'] = array(
     'activate_on'     => array(
-          'picture'     => isset($_POST['activate_on']['picture']),
-          'category'    => isset($_POST['activate_on']['category']) || !$loaded['category'],
-          'register'    => isset($_POST['activate_on']['register']),
-          'contactform' => isset($_POST['activate_on']['contactform']) || !$loaded['contactform'],
-          'guestbook'   => isset($_POST['activate_on']['guestbook']) || !$loaded['guestbook'],
+          'picture'     => in_array('picture', $_POST['activate_on']),
+          'category'    => in_array('category', $_POST['activate_on']) || !$loaded['category'],
+          'register'    => in_array('register', $_POST['activate_on']),
+          'contactform' => in_array('contactform', $_POST['activate_on']) || !$loaded['contactform'],
+          'guestbook'   => in_array('guestbook', $_POST['activate_on']) || !$loaded['guestbook'],
           ),
     'comments_action' => $_POST['comments_action'],
     'theme'           => $_POST['theme'],
@@ -67,34 +67,11 @@ function list_fonts($dir)
   return $fonts;
 }
 
-function presets_to_js($presets)
-{
-  $out = null;
-  
-  foreach ($presets as $name => $param)
-  {
-    $out.= '
-function apply_'.$name.'() {
-  $("input[name=perturbation]").val("'.$param['perturbation'].'");
-  $("input[name=image_bg_color]").val("'.$param['image_bg_color'].'");
-  $("input[name=text_color]").val("'.$param['text_color'].'");
-  $("input[name=num_lines]").val("'.$param['num_lines'].'");
-  $("input[name=line_color]").val("'.$param['line_color'].'");
-  $("input[name=noise_level]").val("'.$param['noise_level'].'");
-  $("input[name=noise_color]").val("'.$param['noise_color'].'");
-  $("input[name=ttf_file]").val(["'.$param['ttf_file'].'"]);
-}';
-  }
-   
-  return $out;
-}
-
 $template->assign(array(
   'crypto' => $conf['cryptographp'],
   'loaded' => $loaded,
   'fonts' => list_fonts(CRYPTO_PATH.'securimage/fonts'),
-  'presets' => array_keys($presets),
-  'PRESETS_FUNC' => presets_to_js($presets),
+  'PRESETS' => $presets,
   'CRYPTO_PATH' => CRYPTO_PATH,
   ));
 

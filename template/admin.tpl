@@ -1,76 +1,93 @@
-{combine_css path=$CRYPTO_PATH|@cat:"template/colorpicker/colorpicker.css"}
-{combine_script id="jquery.colorpicker" require="jquery" path=$CRYPTO_PATH|@cat:"template/colorpicker/colorpicker.js"}
+{combine_css path=$CRYPTO_PATH|@cat:"template/style.css"}
 
-{footer_script require='jquery.colorpicker'}{literal}
-jQuery(document).ready(function() {
-  // colorpicker
-  $('.colorpicker-input')
-    .ColorPicker({
-      onSubmit: function(hsb, hex, rgb, el) { 
-        $(el).val(hex); 
-        $(el).ColorPickerHide(); 
-      },
-      onChange: function(hsb, hex, rgb, el) { 
-        $(el).val(hex); 
-        changeColor(el, hex);
-        changePreview();
-        setThemeCutom();
-      },
-      onBeforeShow: function () { 
-        $(this).ColorPickerSetColor(this.value); 
-      }
-    })
-    .bind('keyup', function(){ 
-      $(this).ColorPickerSetColor(this.value);
-      changeColor(this, $(this).val());
-    })
-    .each(function() {
-      changeColor(this, $(this).val());
-    });
+{combine_css path=$CRYPTO_PATH|@cat:"template/colorpicker/colorpicker.css"}
+{combine_script id="jquery.colorpicker" load="footer" path=$CRYPTO_PATH|@cat:"template/colorpicker/colorpicker.js"}
+
+{combine_css path="themes/default/js/plugins/chosen.css"}
+{combine_script id='jquery.chosen' load='footer' path='themes/default/js/plugins/chosen.jquery.min.js'}
+
+
+{footer_script}{literal}
+// colorpicker
+$('.colorpicker-input')
+  .ColorPicker({
+    onSubmit: function(hsb, hex, rgb, el) { 
+      $(el).val(hex); 
+      $(el).ColorPickerHide(); 
+    },
+    onChange: function(hsb, hex, rgb, el) { 
+      $(el).val(hex); 
+      changeColor(el, hex);
+      changePreview();
+      setThemeCutom();
+    },
+    onBeforeShow: function () { 
+      $(this).ColorPickerSetColor(this.value); 
+    }
+  })
+  .bind('keyup', function(){ 
+    $(this).ColorPickerSetColor(this.value);
+    changeColor(this, $(this).val());
+  })
+  .each(function() {
+    changeColor(this, $(this).val());
+  });
+
+// change button
+$('.button').click(function() {
+  $('.button').removeClass('selected');
+  $(this).addClass('selected');
+  $('input[name=button_color]').val($(this).attr('title'));
+  $('#reload').attr('src', '{/literal}{$CRYPTO_PATH}{literal}template/refresh_'+ $(this).attr('title') +'.png');
+});
+
+// apply a preset
+$('.preset').click(function() {
+  $('.preset').removeClass('selected');
+  $(this).addClass('selected');
   
-  // change button
-  $('.button').click(function() {
-    $('.button').removeClass('selected');
-    $(this).addClass('selected');
-    $('input[name=button_color]').val($(this).attr('title'));
-    $('#reload').attr('src', '{/literal}{$CRYPTO_PATH}{literal}template/refresh_'+ $(this).attr('title') +'.png');
-  });
+  var id = $(this).attr("title");
   
-  // apply a preset
-  $('.preset').click(function() {
-    $('.preset').removeClass('selected');
-    $(this).addClass('selected');
-    eval('apply_'+ $(this).attr('title') +'();');
-    $('.colorpicker-input').each(function() { changeColor(this, $(this).val()); });
-    $('input[name=theme]').val($(this).attr('title'));
-    changePreview();
-  });
+  for (key in presets[id]) {
+    $('input[name="'+ key +'"]').val([presets[id][key]]);
+  }
   
-  // display customization panel
-  $('.customize').click(function() {
-    $('#theming').toggle();
-  });
-  
-  // change theme to 'custom' if a parameter is changed
-  $('input.istheme').change(function() {
-    setThemeCutom();
-  });
-  
-  // update the preview
-  $('input.istheme, input.preview').change(function() {
-    changePreview();
-  });
-  $('#reload').click(function() {
-    changePreview();
-  });
-  
-  // links for random color
-  $('a.random').click(function() {
-    $(this).prev('label').children('input').val('random');
-    changeColor($(this).prev('label').children('input'), 'random');
-    changePreview();
-    setThemeCutom();
-  });
+  $('.colorpicker-input').each(function() { changeColor(this, $(this).val()); });
+  $('input[name="theme"]').val($(this).attr('title'));
+  changePreview();
+});
+
+// display customization panel
+$('.customize').click(function() {
+  $('#theming').toggle();
+});
+
+// change theme to 'custom' if a parameter is changed
+$('input.istheme').change(function() {
+  setThemeCutom();
+});
+
+// update the preview
+$('input.istheme, input.preview').change(function() {
+  changePreview();
+});
+$('#reload').click(function() {
+  changePreview();
+});
+
+// links for random color
+$('a.random').click(function() {
+  $(this).prev('label').children('input').val('random');
+  changeColor($(this).prev('label').children('input'), 'random');
+  changePreview();
+  setThemeCutom();
+});
+
+// multiselect
+$("select").css({
+  "width":"700px"
+}).chosen({
+  disable_search:true,
 });
 
 function setThemeCutom() {
@@ -104,8 +121,17 @@ function changeColor(target, color) {
 }
 {/literal}
 
-{$PRESETS_FUNC}
+var presets = {ldelim}
+{foreach from=$PRESETS key=name item=params}
+  "{$name}" : {ldelim}
+  {foreach from=$params key=key item=value}
+    "{$key}" : "{$value}",
+  {/foreach}
+  },
+{/foreach}
+};
 {/footer_script}
+
 
 {html_head}
 <style type="text/css">
@@ -115,26 +141,9 @@ function changeColor(target, color) {
   src: url({$CRYPTO_PATH}securimage/fonts/{$font}.ttf) format("truetype");  
 }
 {/foreach}
-
-.preset img, .button img {ldelim}
-  margin:1px;
-  padding:3px;
-  border:1px solid #999;
-}
-.preset.selected img, .button.selected img {ldelim}
-  border-color:#f70;
-}
-
-.big-list {ldelim}
-  display:relative;
-  margin-left:51%;
-}
-.big-list label {ldelim}
-  display:inline-block;
-  margin-right:10px;
-}
 </style>
 {/html_head}
+
 
 <div class="titrePage">
   <h2>Crypto Captcha</h2>
@@ -146,58 +155,55 @@ function changeColor(target, color) {
   
   <ul>
     <li>
-      <span class="property">{'Activate on'|@translate}</span>
-      <div class="big-list">
-        <label><input type="checkbox" name="activate_on[picture]" value="1" {if $crypto.activate_on.picture}checked="checked"{/if}> {'Picture comments'|@translate}</label>
-        {if $loaded.category}<label><input type="checkbox" name="activate_on[category]" value="1" {if $crypto.activate_on.category}checked="checked"{/if}> {'Album comments'|@translate}</label>{/if}
-        <label><input type="checkbox" name="activate_on[register]" value="1" {if $crypto.activate_on.register}checked="checked"{/if}> {'Register form'|@translate}</label>
-        {if $loaded.contactform}<label><input type="checkbox" name="activate_on[contactform]" value="1" {if $crypto.activate_on.contactform}checked="checked"{/if}> {'Contact form'|@translate}</label>{/if}
-        {if $loaded.guestbook}<label><input type="checkbox" name="activate_on[guestbook]" value="1" {if $crypto.activate_on.guestbook}checked="checked"{/if}> {'Guestbook'|@translate}</label>{/if}
-        </div>
+      <b>{'Activate on'|@translate}</b>
+      <select name="activate_on[]" multiple>
+        <option value="picture" {if $crypto.activate_on.picture}selected{/if}>{'Picture comments'|@translate}</option>
+        {if $loaded.category}<option value="category" {if $crypto.activate_on.category}selected{/if}>{'Album comments'|@translate}</option>{/if}
+        <option value="register" {if $crypto.activate_on.register}selected{/if}>{'Register form'|@translate}</option>
+        {if $loaded.contactform}<option value="contactform" {if $crypto.activate_on.contactform}selected{/if}>{'Contact form'|@translate}</option>{/if}
+        {if $loaded.guestbook}<option value="guestbook" {if $crypto.activate_on.guestbook}selected{/if}>{'Guestbook'|@translate}</option>{/if}
+      </select>
     </li>
     <li>
-      <span class="property">{'Comments action'|@translate}</span>
+      <b>{'Comments action'|@translate}</b>
       <label><input type="radio" name="comments_action" value="reject" {if $crypto.comments_action == 'reject'}checked="checked"{/if}> {'Reject'|@translate}</label>
       <label><input type="radio" name="comments_action" value="moderate" {if $crypto.comments_action == 'moderate'}checked="checked"{/if}> {'Moderate'|@translate}</label>
     </li>
     <li>
-      <span class="property">{'Captcha type'|@translate}</span>
+      <b>{'Captcha type'|@translate}</b>
       <label><input type="radio" name="captcha_type" class="preview" value="string" {if $crypto.captcha_type == 'string'}checked="checked"{/if}> {'Random string'|@translate}</label>
       <label><input type="radio" name="captcha_type" class="preview" value="math" {if $crypto.captcha_type == 'math'}checked="checked"{/if}> {'Simple equation'|@translate}</label>
     </li>
     <!--<li>
-      <span class="property">{'Case sensitive'|@translate}</span>
+      <b>{'Case sensitive'|@translate}</b>
       <label><input type="radio" name="case_sensitive" value="false" {if $crypto.case_sensitive == 'false'}checked="checked"{/if}> {'No'|@translate}</label>
       <label><input type="radio" name="case_sensitive" value="true" {if $crypto.case_sensitive == 'true'}checked="checked"{/if}> {'Yes'|@translate}</label>
     </li>-->
     <li>
-      <span class="property">{'Code lenght'|@translate}</span>
+      <b>{'Code lenght'|@translate}</b>
       <label><input type="text" name="code_length" class="preview" value="{$crypto.code_length}" size="6" maxlength="2"></label>
     </li>
     <li>
-      <span class="property">{'Width'|@translate}</span>
+      <b>{'Width'|@translate}</b>
       <label><input type="text" name="width" class="preview" value="{$crypto.width}" size="6" maxlength="3"> {'good value:'|@translate} lenght&times;30</label>
     </li>
     <li>
-      <span class="property">{'Height'|@translate}</span>
+      <b>{'Height'|@translate}</b>
       <label><input type="text" name="height" class="preview" value="{$crypto.height}" size="6" maxlength="3"> {'good value:'|@translate} lenght&times;12</label>
     </li>
     <li>
-      <span class="property">{'Button color'|@translate}</span>
-      <div style="display:relative;margin-left:51%;">
-        <a class="button {if $crypto.button_color == 'dark'}selected{/if}" title="dark"><img src="{$CRYPTO_PATH}template/refresh_dark.png" alt="dark"></a>
-        <a class="button {if $crypto.button_color == 'light'}selected{/if}" title="light"><img src="{$CRYPTO_PATH}template/refresh_light.png" alt="light"></a>
-        <input type="hidden" name="button_color" value="{$crypto.button_color}">
-      </div>
+      <b>{'Button color'|@translate}</b>
+      <a class="button {if $crypto.button_color == 'dark'}selected{/if}" title="dark"><img src="{$CRYPTO_PATH}template/refresh_dark.png" alt="dark"></a>
+      <a class="button {if $crypto.button_color == 'light'}selected{/if}" title="light"><img src="{$CRYPTO_PATH}template/refresh_light.png" alt="light"></a>
+      <input type="hidden" name="button_color" value="{$crypto.button_color}">
     </li>
     <li>
-      <span class="property">{'Captcha theme'|@translate}</span>
-      <div style="display:relative;margin-left:51%;">
-        {foreach from=$presets item=preset}
-        <a class="preset {if $crypto.theme == $preset}selected{/if}" title="{$preset}"><img src="{$CRYPTO_PATH}template/presets/{$preset}.png" alt="{$preset}"></a>
-        {/foreach}
-        <br><a class="customize">{'Customize'|@translate}</a><input type="hidden" name="theme" value="{$crypto.theme}">
-      </div>
+      <b>{'Captcha theme'|@translate}</b>
+      {foreach from=$PRESETS key=preset item=params}
+      <a class="preset {if $crypto.theme == $preset}selected{/if}" title="{$preset}"><img src="{$CRYPTO_PATH}template/presets/{$preset}.png" alt="{$preset}"></a>
+      {/foreach}
+      <input type="hidden" name="theme" value="{$crypto.theme}">
+      <a class="customize">{'Customize'|@translate}</a>
     </li>
   </ul>
   
@@ -206,44 +212,42 @@ function changeColor(target, color) {
     
     <ul>
       <li>
-        <span class="property">{'Perturbation'|@translate}</span>
+        <b>{'Perturbation'|@translate}</b>
         <label><input type="text" name="perturbation" value="{$crypto.perturbation}" class="istheme" size="6" maxlength="4"> {'range:'|@translate} 0 - 1</label>
       </li>
       <li>
-        <span class="property">{'Background color'|@translate}</span>
+        <b>{'Background color'|@translate}</b>
         <label><input type="text" name="image_bg_color" value="{$crypto.image_bg_color}" class="colorpicker-input istheme" size="6" maxlength="6"></label> 
         <a class="random" title="{'random'|@translate}"><img src="{$CRYPTO_PATH}/template/arrow_switch.png"></a>
       </li>
       <li>
-        <span class="property">{'Text color'|@translate}</span>
+        <b>{'Text color'|@translate}</b>
         <label><input type="text" name="text_color" value="{$crypto.text_color}" class="colorpicker-input istheme" size="6" maxlength="6"></label> 
         <a class="random" title="{'random'|@translate}"><img src="{$CRYPTO_PATH}/template/arrow_switch.png"></a>
       </li>
       <li>
-        <span class="property">{'Lines density'|@translate}</span>
+        <b>{'Lines density'|@translate}</b>
         <label><input type="text" name="num_lines" value="{$crypto.num_lines}" class="istheme" size="6" maxlength="4"> {'range:'|@translate} 0 - 10</label>
       </li>
       <li>
-        <span class="property">{'Lines color'|@translate}</span>
+        <b>{'Lines color'|@translate}</b>
         <label><input type="text" name="line_color" value="{$crypto.line_color}" class="colorpicker-input istheme" size="6" maxlength="6"></label> 
         <a class="random" title="{'random'|@translate}"><img src="{$CRYPTO_PATH}/template/arrow_switch.png"></a>
       </li>
       <li>
-        <span class="property">{'Noise level'|@translate}</span>
+        <b>{'Noise level'|@translate}</b>
         <label><input type="text" name="noise_level" value="{$crypto.noise_level}" class="istheme" size="6" maxlength="4"> {'range:'|@translate} 0 - 10</label>
       </li>
       <li>
-        <span class="property">{'Noise color'|@translate}</span>
+        <b>{'Noise color'|@translate}</b>
         <label><input type="text" name="noise_color" value="{$crypto.noise_color}" class="colorpicker-input istheme" size="6" maxlength="6"></label> 
         <a class="random" title="{'random'|@translate}"><img src="{$CRYPTO_PATH}/template/arrow_switch.png"></a>
       </li>
       <li>
-        <span class="property">{'Font'|@translate}</span>
-        <div class="big-list">
-          {foreach from=$fonts item=font}
-          <label style="font-family:{$font};" title="{$font}"><input type="radio" name="ttf_file" value="{$font}" {if $crypto.ttf_file == $font}checked="checked"{/if} class="istheme"> {$font}</label>
-          {/foreach}
-        </div>
+        <b>{'Font'|@translate}</b>
+        {foreach from=$fonts item=font}
+        <label style="font-family:{$font};" title="{$font}"><input type="radio" name="ttf_file" value="{$font}" {if $crypto.ttf_file == $font}checked="checked"{/if} class="istheme"> {$font}</label>
+        {/foreach}
       </li>
     </ul>
     
@@ -252,14 +256,15 @@ function changeColor(target, color) {
   
   <ul style="margin-top:30px;">
     <li>
-      <span class="property">{'Preview'|@translate}</span>
+      <b>{'Preview'|@translate}</b>
       <img id="captcha" src="{$CRYPTO_PATH}securimage/securimage_show.php" alt="CAPTCHA Image">
       <a href="#" onClick="return false;"><img id="reload" src="{$CRYPTO_PATH}template/refresh_{$crypto.button_color}.png"></a>
     </li>
   </ul>
   
 </fieldset>
-<p><input class="submit" type="submit" value="{'Submit'|@translate}" name="submit"></p>
+
+<p class="formButtons"><input class="submit" type="submit" value="{'Submit'|@translate}" name="submit"></p>
 </form>
 
 <div style="text-align:right;">
