@@ -133,16 +133,14 @@ var presets = {ldelim}
 {/footer_script}
 
 
-{html_head}
-<style type="text/css">
+{html_style}
 {foreach from=$fonts item=font}
 @font-face {ldelim}  
   font-family: {$font} ;  
   src: url({$CRYPTO_PATH}securimage/fonts/{$font}.ttf) format("truetype");  
 }
 {/foreach}
-</style>
-{/html_head}
+{/html_style}
 
 
 <div class="titrePage">
