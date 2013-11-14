@@ -50,4 +50,5 @@ $lang['Lines density'] = 'Densitat de les línies';
 $lang['Moderate'] = 'Moderat';
 $lang['Perturbation'] = 'Pertorbació';
 $lang['Picture comments'] = 'Comentaris de la imatge';
+$lang['Button color'] = 'Color del botó';
 ?>
