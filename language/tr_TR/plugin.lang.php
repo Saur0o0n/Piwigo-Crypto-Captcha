@@ -51,4 +51,6 @@ $lang['Noise level'] = 'Gürültü seviyesi';
 $lang['Perturbation'] = 'Karışıklık';
 $lang['Picture comments'] = 'Resim yorumları';
 $lang['Button color'] = 'Buton rengi';
+$lang['We detected that EasyCaptcha plugin is available on your gallery. Both plugins can be used at the same time, but you should not under any circumstances activate both of them on the same page.'] = 'EasyCaptcha eklentisinin galeriniz için etkin olduğu tespit edildi. Her iki eklenti de aynı anda kullanılabilir fakat hiç bir koşulda aynı sayfada her ikisi de aktif halde olmamalıdır.';
+
 ?>

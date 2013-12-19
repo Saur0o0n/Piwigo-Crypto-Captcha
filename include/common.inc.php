@@ -1,5 +1,5 @@
 <?php
-if (!defined('PHPWG_ROOT_PATH')) die('Hacking attempt!');
+defined('CRYPTO_ID') or die('Hacking attempt!');
 
 global $template;
 
@@ -17,5 +17,3 @@ $template->assign(array(
   
 $template->set_filename('cryptographp', realpath(CRYPTO_PATH.'template/'.$conf['cryptographp']['template'].'.tpl'));
 $template->assign_var_from_handle('CRYPTOGRAPHP', 'cryptographp');
-
-?>

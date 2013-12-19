@@ -1,5 +1,5 @@
 <?php
-if (!defined('PHPWG_ROOT_PATH')) die('Hacking attempt!');
+defined('CRYPTO_ID') or die('Hacking attempt!');
 
 include(CRYPTO_PATH.'include/common.inc.php');
 add_event_handler('loc_end_picture', 'add_crypto');
@@ -28,11 +28,9 @@ function check_crypto($action, $comment)
 
   if ($securimage->check($_POST['captcha_code']) == false)
   {
-    if ($conf['cryptographp']['comments_action'] == 'reject') array_push($page['errors'], l10n('Invalid Captcha'));
+    if ($conf['cryptographp']['comments_action'] == 'reject') $page['errors'][] = l10n('Invalid Captcha');
     return ($action != 'reject') ? $conf['cryptographp']['comments_action'] : 'reject';
   }
 
   return $action;
 }
-
-?>

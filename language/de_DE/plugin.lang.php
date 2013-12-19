@@ -51,4 +51,6 @@ $lang['Guestbook'] = 'Gästebuch';
 $lang['Picture comments'] = 'Bilder Kommentare';
 $lang['Register form'] = 'Registrierungs-Formular ';
 $lang['Button color'] = 'Tastenfarbe';
+$lang['We detected that EasyCaptcha plugin is available on your gallery. Both plugins can be used at the same time, but you should not under any circumstances activate both of them on the same page.'] = 'Es wurde festgestellt, dass das EasyCaptcha Plugin in deiner Gallerie verfügbar ist. Beide Plugins können zeitgleich benutzt werden, aber auf keinen Fall dürfen beide auf der gleichen Seite aktiviert sein.';
+
 ?>

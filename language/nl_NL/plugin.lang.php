@@ -51,4 +51,6 @@ $lang['Noise level'] = 'Ruis niveau';
 $lang['Lines density'] = 'Regel dichtheid';
 $lang['Invalid Captcha'] = 'Ongeldige Captcha';
 $lang['Button color'] = 'Knopkleur';
+$lang['We detected that EasyCaptcha plugin is available on your gallery. Both plugins can be used at the same time, but you should not under any circumstances activate both of them on the same page.'] = 'Geconstateerd wordt dat u ook EasyCaptcha gebruikt. Beide plugins kunnen tegelijkertijd gebruikt worden, maar kunnen beter niet op dezelfde pagina tegelijkertijd gebruikt worden.';
+
 ?>

@@ -51,4 +51,6 @@ $lang['Noise level'] = 'Støjniveau';
 $lang['Perturbation'] = 'Uro';
 $lang['Picture comments'] = 'Billedkommentarer';
 $lang['Button color'] = 'Knapfarve';
+$lang['We detected that EasyCaptcha plugin is available on your gallery. Both plugins can be used at the same time, but you should not under any circumstances activate both of them on the same page.'] = 'Vi har opdaget, at EasyCaptcha-plugin\'en er aktiveret i dit galleri. Begge plugin\'er kan benyttes på samme tid, men du bør under ingen omstændigheder aktivere dem begge på den samme side.';
+
 ?>

@@ -32,4 +32,6 @@ $lang['Guestbook'] = 'Knihu návštěv';
 $lang['Picture comments'] = 'Komentáře k obrázkům';
 $lang['Register form'] = 'Registrační formulář';
 $lang['Button color'] = 'Barva tlačítka';
+$lang['We detected that EasyCaptcha plugin is available on your gallery. Both plugins can be used at the same time, but you should not under any circumstances activate both of them on the same page.'] = 'Zjistili jsme, že používáte také EasyCaptcha plugin. Oba pluginy mohou být používány současně, ale nesmějí být za žádných okolností aktivovány na stejné stránce.';
+
 ?>

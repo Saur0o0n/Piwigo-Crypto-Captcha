@@ -2,7 +2,7 @@
 </tr>
 <tr>
   <td>
-    <label for="captcha">{if $CRYPTO.captcha_type=='string'}{'Enter code'|@translate}{else}{'Solve equation'|@translate}{/if}</label>
+    <label for="captcha">{if $CRYPTO.captcha_type=='string'}{'Enter code'|translate}{else}{'Solve equation'|translate}{/if}</label>
     <input type="text" name="captcha_code" id="captcha_code" style="width:{$CRYPTO.code_length}em" maxlength="{$CRYPTO.code_length}" />
   </td>
   <td>
@@ -12,5 +12,5 @@
 
 {footer_script}
 var captcha_code = new LiveValidation("captcha_code", {ldelim} onlyOnSubmit: true });
-captcha_code.add(Validate.Presence, {ldelim} failureMessage: "{'Invalid Captcha'|@translate}" });
+captcha_code.add(Validate.Presence, {ldelim} failureMessage: "{'Invalid Captcha'|translate}" });
 {/footer_script}

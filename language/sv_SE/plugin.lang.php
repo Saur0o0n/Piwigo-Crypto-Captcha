@@ -51,4 +51,6 @@ $lang['Invalid Captcha'] = 'Ogiltig Captcha';
 $lang['Lines color'] = 'Radfär';
 $lang['Lines density'] = 'Rad-densitet';
 $lang['Moderate'] = 'Moderera';
+$lang['We detected that EasyCaptcha plugin is available on your gallery. Both plugins can be used at the same time, but you should not under any circumstances activate both of them on the same page.'] = 'Vi upptäckte att EasyCaptcha-pluginet är tillgängligt i ditt galleri. Bägge plugins kan användas parallelt men du borde verkligen inte aktivera bägge på samma sida.';
+
 ?>

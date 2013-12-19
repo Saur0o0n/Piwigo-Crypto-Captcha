@@ -50,6 +50,7 @@ $lang['Lines density'] = 'Densidade das linhas';
 $lang['Moderate'] = 'Moderar';
 $lang['Noise color'] = 'Cor do ruído ';
 $lang['Noise level'] = 'Nível de ruído';
-$lang['Perturbation'] = 'Perturbação
-';
+$lang['Perturbation'] = 'Perturbação';
+$lang['We detected that EasyCaptcha plugin is available on your gallery. Both plugins can be used at the same time, but you should not under any circumstances activate both of them on the same page.'] = 'Detectamos que a extensão EasyCaptcha está disponível na sua galeria. Ambas as extensões podem ser usadas ​​ao mesmo tempo, mas  não deverá em nenhuma circunstância ativar ambas na mesma página ..';
+
 ?>

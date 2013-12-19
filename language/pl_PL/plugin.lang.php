@@ -32,4 +32,6 @@ $lang['Guestbook'] = 'Księga gości';
 $lang['Picture comments'] = 'Komentarze zdjęć';
 $lang['Register form'] = 'Formularz rejestracyjny';
 $lang['Button color'] = 'Kolor przycisku';
+$lang['We detected that EasyCaptcha plugin is available on your gallery. Both plugins can be used at the same time, but you should not under any circumstances activate both of them on the same page.'] = 'W galerii wykryto wtyczkę EasyCaptcha. Obie wtyczki mogą być używane jednoczenie, ale pod żadnym pozorem nie na jednej stronie.';
+
 ?>

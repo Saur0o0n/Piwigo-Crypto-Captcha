@@ -1,3 +1,3 @@
-'Crypto Captcha'（原'CryptograPHP'）通过在注册、评论界面和'ContactForm'插件中加入验证码的方式限制您相册中的垃圾信息。
+'Crypto Captcha'通过在注册、评论界面和'ContactForm'插件中加入验证码的方式限制您相册中的垃圾信息。
 其工作原理与 P@t 的插件'Captcha'一样，但它采用的是 Securimage generator (www.phpcaptcha.org) 而非 reCAPTCHA (www.google.com/recaptcha)。
 与'Comments on Albums'、'GuestBook'和'Contact Form'插件兼容。

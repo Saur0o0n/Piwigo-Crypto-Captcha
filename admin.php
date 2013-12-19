@@ -1,27 +1,31 @@
 <?php
-if (!defined('PHPWG_ROOT_PATH')) die('Hacking attempt!');
+defined('CRYPTO_ID') or die('Hacking attempt!');
 
 global $pwg_loaded_plugins;
 $loaded = array(
   'contactform' => isset($pwg_loaded_plugins['ContactForm']),
   'category' => isset($pwg_loaded_plugins['Comments_on_Albums']),
   'guestbook' => isset($pwg_loaded_plugins['GuestBook']),
+  'easycaptcha' => isset($pwg_loaded_plugins['EasyCaptcha']),
   );
 
-
-load_language('plugin.lang', CRYPTO_PATH);
-
+if ($loaded['easycaptcha'])
+{
+  $page['warnings'][] = l10n('We detected that EasyCaptcha plugin is available on your gallery. Both plugins can be used at the same time, but you should not under any circumstances activate both of them on the same page.');
+}
 
 if ( isset($_POST['submit']))
-{  
+{
+  if (!isset($_POST['activate_on'])) $_POST['activate_on'] = array();
+  
   $conf['cryptographp'] = array(
     'activate_on'     => array(
-          'picture'     => in_array('picture', $_POST['activate_on']),
-          'category'    => in_array('category', $_POST['activate_on']) || !$loaded['category'],
-          'register'    => in_array('register', $_POST['activate_on']),
-          'contactform' => in_array('contactform', $_POST['activate_on']) || !$loaded['contactform'],
-          'guestbook'   => in_array('guestbook', $_POST['activate_on']) || !$loaded['guestbook'],
-          ),
+      'picture'     => in_array('picture', $_POST['activate_on']),
+      'category'    => in_array('category', $_POST['activate_on']) || !$loaded['category'],
+      'register'    => in_array('register', $_POST['activate_on']),
+      'contactform' => in_array('contactform', $_POST['activate_on']) || !$loaded['contactform'],
+      'guestbook'   => in_array('guestbook', $_POST['activate_on']) || !$loaded['guestbook'],
+      ),
     'comments_action' => $_POST['comments_action'],
     'theme'           => $_POST['theme'],
     'captcha_type'    => $_POST['captcha_type'],
@@ -41,7 +45,7 @@ if ( isset($_POST['submit']))
     );
   
   conf_update_param('cryptographp', serialize($conf['cryptographp']));
-  array_push($page['infos'], l10n('Information data registered in database'));
+  $page['infos'][] = l10n('Information data registered in database');
 }
 
 $presets = array(
@@ -77,5 +81,3 @@ $template->assign(array(
 
 $template->set_filename('plugin_admin_content', dirname(__FILE__).'/template/admin.tpl');
 $template->assign_var_from_handle('ADMIN_CONTENT', 'plugin_admin_content');
-
-?>

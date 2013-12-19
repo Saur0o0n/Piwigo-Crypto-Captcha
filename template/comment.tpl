@@ -1,4 +1,4 @@
-<p><label>{if $CRYPTO.captcha_type=='string'}{'Enter code'|@translate}{else}{'Solve equation'|@translate}{/if} :</label></p>
+<p><label>{if $CRYPTO.captcha_type=='string'}{'Enter code'|translate}{else}{'Solve equation'|translate}{/if} :</label></p>
 <p>
   <img id="captcha" src="{$CRYPTO_PATH}securimage/securimage_show.php" alt="CAPTCHA Image">
   <a href="#" onclick="document.getElementById('captcha').src = '{$CRYPTO_PATH}securimage/securimage_show.php?'+Math.random(); return false;">

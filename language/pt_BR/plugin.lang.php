@@ -51,4 +51,6 @@ $lang['Moderate'] = 'Moderada';
 $lang['Noise color'] = 'Cor barulhenta';
 $lang['Noise level'] = 'Nível barulhento';
 $lang['Perturbation'] = 'Pertubação';
+$lang['We detected that EasyCaptcha plugin is available on your gallery. Both plugins can be used at the same time, but you should not under any circumstances activate both of them on the same page.'] = 'Detectamos que EasyCaptcha plugin está disponível em sua galeria. Ambos os plugins podem ser usados ​​ao mesmo tempo, mas você não deve em hipótese alguma ativar ambos na mesma página.';
+
 ?>
