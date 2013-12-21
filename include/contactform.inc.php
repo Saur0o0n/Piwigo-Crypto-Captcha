@@ -8,7 +8,7 @@ add_event_handler('contact_form_check', 'check_crypto', EVENT_HANDLER_PRIORITY_N
 function add_crypto()
 {
   global $template;
-  $template->set_prefilter('index', 'prefilter_crypto');
+  $template->set_prefilter('contactform', 'prefilter_crypto');
 }
 
 function prefilter_crypto($content, $smarty)

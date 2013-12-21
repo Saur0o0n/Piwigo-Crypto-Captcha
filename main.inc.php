@@ -57,7 +57,7 @@ function crypto_init()
 // modules
 function crypto_document_init()
 {
-  global $conf, $user;
+  global $conf, $user, $page;
   
   if (!is_a_guest())
   {
