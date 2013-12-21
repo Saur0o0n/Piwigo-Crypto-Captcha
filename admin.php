@@ -19,7 +19,7 @@ if ( isset($_POST['submit']))
   if (!isset($_POST['activate_on'])) $_POST['activate_on'] = array();
   
   $conf['cryptographp'] = array(
-    'activate_on'     => array(
+    'activate_on' => array(
       'picture'     => in_array('picture', $_POST['activate_on']),
       'category'    => in_array('category', $_POST['activate_on']) || !$loaded['category'],
       'register'    => in_array('register', $_POST['activate_on']),

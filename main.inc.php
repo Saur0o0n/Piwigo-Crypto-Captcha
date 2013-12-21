@@ -37,6 +37,7 @@ if (defined('IN_ADMIN'))
 else
 {
   add_event_handler('loc_end_section_init', 'crypto_document_init', EVENT_HANDLER_PRIORITY_NEUTRAL+30);
+  add_event_handler('loc_begin_register', 'crypto_register_init', EVENT_HANDLER_PRIORITY_NEUTRAL+30);
 }
 
 
@@ -63,15 +64,9 @@ function crypto_document_init()
   {
     return;
   }
-  
-  if (script_basename() == 'register' and $conf['cryptographp']['activate_on']['register'])
+
+  if (script_basename() == 'picture' and $conf['cryptographp']['activate_on']['picture'])
   {
-    $conf['cryptographp']['template'] = 'register';
-    include(CRYPTO_PATH . 'include/register.inc.php');
-  }
-  else if (script_basename() == 'picture' and $conf['cryptographp']['activate_on']['picture'])
-  {
-    $conf['cryptographp']['template'] = 'comment';
     include(CRYPTO_PATH . 'include/picture.inc.php');
   }
   else if (isset($page['section']))
@@ -83,19 +78,30 @@ function crypto_document_init()
       $conf['cryptographp']['activate_on']['category']
       )
     {
-      $conf['cryptographp']['template'] = 'comment';
       include(CRYPTO_PATH . 'include/category.inc.php');
     }
     else if ($page['section'] == 'contact' && $conf['cryptographp']['activate_on']['contactform'])
     {
-      $conf['cryptographp']['template'] = 'contactform';
       include(CRYPTO_PATH . 'include/contactform.inc.php');
     }
     else if ($page['section'] == 'guestbook' && $conf['cryptographp']['activate_on']['guestbook'])
     {
-      $conf['cryptographp']['template'] = 'guestbook';
       include(CRYPTO_PATH . 'include/guestbook.inc.php');
     }
+  }
+}
+function crypto_register_init()
+{
+  global $conf;
+  
+  if (!is_a_guest())
+  {
+    return;
+  }
+
+  if ($conf['cryptographp']['activate_on']['register'])
+  {
+    include(CRYPTO_PATH . 'include/register.inc.php');
   }
 }
 

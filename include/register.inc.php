@@ -1,7 +1,9 @@
 <?php
 defined('CRYPTO_ID') or die('Hacking attempt!');
 
+$conf['cryptographp']['template'] = 'register';
 include(CRYPTO_PATH.'include/common.inc.php');
+
 add_event_handler('loc_end_page_header', 'add_crypto');
 add_event_handler('register_user_check', 'check_crypto');
 
@@ -13,8 +15,8 @@ function add_crypto()
 
 function prefilter_crypto($content, $smarty)
 {
-  $search = '#\(\{\'useful when password forgotten\'\|@translate\}\)(\s*)((\{/if\})?)#i';
-  $replace = '({\'useful when password forgotten\'|@translate})$1$2'."\n".'{\$CRYPTOGRAPHP}';
+  $search = '#\(\{\'useful when password forgotten\'\|(@?)translate\}\)(\s*)((?:\{/if\})?)#i';
+  $replace = '({\'useful when password forgotten\'|$1translate})$2$3'."\n".'{\$CRYPTO.parsed_content}';
   return preg_replace($search, $replace, $content);
 }
 

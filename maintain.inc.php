@@ -7,6 +7,8 @@ class CryptograPHP_maintain extends PluginMaintain
 
   function install($plugin_version, &$errors=array())
   {
+    global $conf;
+    
     if (isset($conf['cryptograph_theme']))
     {
       conf_delete_param('cryptograph_theme');

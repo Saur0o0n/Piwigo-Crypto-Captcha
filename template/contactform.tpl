@@ -1,4 +1,3 @@
-</tr>     
 <tr>
   <td class="title">
     {if $CRYPTO.captcha_type=='string'}{'Enter code'|translate}{else}{'Solve equation'|translate}{/if}
@@ -10,7 +9,8 @@
       <img src="{$CRYPTO_PATH}template/refresh_{$CRYPTO.button_color}.png" style="vertical-align:bottom;"></a>
   </td>
 
-{footer_script}
-var captcha_code = new LiveValidation("captcha_code", {ldelim} onlyOnSubmit: true, insertAfterWhatNode: "captcha_refresh" });
-captcha_code.add(Validate.Presence, {ldelim} failureMessage: "{'Invalid Captcha'|translate}" });
-{/footer_script}
+  {footer_script}
+  var captcha_code = new LiveValidation("captcha_code", {ldelim} onlyOnSubmit: true, insertAfterWhatNode: "captcha_refresh" });
+  captcha_code.add(Validate.Presence, {ldelim} failureMessage: "{'Invalid Captcha'|translate}" });
+  {/footer_script}
+</tr>
