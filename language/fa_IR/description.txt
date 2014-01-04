@@ -1,5 +1,6 @@
 CryptoCaptcha
-افزودن تصویرکپتچربه register, comment, GuestBook  and ContactForm pages
+افزودن تصویر ضد روبات  برای  کتاب مهمان  دیدگاه ها صفحه ثت نام وصفحه محتوا 
+Add a captcha to register, comment, GuestBook and ContactForm pages
 
 
 
