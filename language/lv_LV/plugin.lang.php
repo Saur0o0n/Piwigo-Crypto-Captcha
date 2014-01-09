@@ -34,4 +34,8 @@ $lang['Register form'] = 'Reģistra forma';
 $lang['Button color'] = 'Pogas krāsa';
 $lang['We detected that EasyCaptcha plugin is available on your gallery. Both plugins can be used at the same time, but you should not under any circumstances activate both of them on the same page.'] = 'Mēs esam konstatējuši, ka jūsu galerijā ir pieejams EasyCaptcha spraudnis. Abus spraudņus var izmantot vienlaicīgi, bet nekādā gadījumā jūs nedrikstat aktivēt abus vienā un tajā pašā lapā.';
 
+$lang['Image'] = 'attēls';
+$lang['Color'] = 'Krāsa';
+$lang['Background image'] = 'Fona attēls';
+$lang['Background'] = 'Fons';
 ?>
