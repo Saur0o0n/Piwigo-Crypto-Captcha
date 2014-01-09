@@ -34,4 +34,8 @@ $lang['Register form'] = 'Modulo registrazione';
 $lang['Button color'] = 'Colore pulsante';
 $lang['We detected that EasyCaptcha plugin is available on your gallery. Both plugins can be used at the same time, but you should not under any circumstances activate both of them on the same page.'] = 'Abbiamo rilevato che il plugin EasyCaptcha è disponibile nella tua galleria. Entrambi i plugin possono essere utilizzati allo stesso tempo, ma non devono in nessun caso essere attivati entrambi sulla stessa pagina.';
 
+$lang['Image'] = 'Immagine';
+$lang['Color'] = 'Colore';
+$lang['Background image'] = 'Immagine di fondo';
+$lang['Background'] = 'Sfondo';
 ?>
