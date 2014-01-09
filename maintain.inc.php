@@ -31,8 +31,10 @@ class CryptograPHP_maintain extends PluginMaintain
         'code_length'     => 6,
         'width'           => 180, 
         'height'          => 70,
-        'perturbation'    => 1, 
-        'image_bg_color'  => 'ffffff', 
+        'perturbation'    => 1,
+        'background'      => 'color',
+        'bg_color'        => 'ffffff', 
+        'bg_image'        => '', 
         'text_color'      => '8a8a8a', 
         'num_lines'       => 2, 
         'line_color'      => '8a8a8a', 
@@ -62,6 +64,13 @@ class CryptograPHP_maintain extends PluginMaintain
       if (!isset($old_conf['button_color']))
       {
         $old_conf['button_color'] = 'dark';
+      }
+      if (!isset($old_conf['background']))
+      {
+        $old_conf['background'] = 'color';
+        $old_conf['bg_color'] = $old_conf['image_bg_color'];
+        $old_conf['bg_image'] = '';
+        unset($old_conf['image_bg_color']);
       }
       
       $conf['cryptographp'] = serialize($old_conf);

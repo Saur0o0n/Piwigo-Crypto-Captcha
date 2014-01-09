@@ -14,7 +14,9 @@ $temp_conf = array(
   'width'           => (int)$_GET['width'], 
   'height'          => (int)$_GET['height'],
   'perturbation'    => (float)$_GET['perturbation'],
-  'image_bg_color'  => $_GET['image_bg_color'],
+  'background'      => $_GET['background'],
+  'bg_color'        => $_GET['bg_color'],
+  'bg_image'        => $_GET['bg_image'],
   'code_length'     => (int)$_GET['code_length'],
   'text_color'      => $_GET['text_color'],
   'num_lines'       => (float)$_GET['num_lines'],
@@ -37,7 +39,7 @@ function randomColor()
   return $c;
 }
 
-foreach (array('image_bg_color','text_color','line_color','noise_color') as $color)
+foreach (array('bg_color','text_color','line_color','noise_color') as $color)
 {
   if ($temp_conf[$color] == 'random') $temp_conf[$color] = randomColor();
 }
@@ -52,7 +54,6 @@ $img->captcha_type    = ($temp_conf['captcha_type'] == 'string') ? Securimage::S
 $img->image_width     = $temp_conf['width']; 
 $img->image_height    = $temp_conf['height'];
 $img->perturbation    = $temp_conf['perturbation'];
-$img->image_bg_color  = new Securimage_Color('#'.$temp_conf['image_bg_color']);
 $img->text_color      = new Securimage_Color('#'.$temp_conf['text_color']); 
 $img->num_lines       = $temp_conf['num_lines'];
 $img->line_color      = new Securimage_Color('#'.$temp_conf['line_color']);
@@ -60,6 +61,20 @@ $img->noise_level     = $temp_conf['noise_level'];
 $img->noise_color     = new Securimage_Color('#'.$temp_conf['noise_color']);
 $img->code_length     = $temp_conf['code_length'];
 
-$img->show();
-
-?>
+if ($temp_conf['background'] == 'image')
+{
+  if ($temp_conf['bg_image'] == 'random')
+  {
+    $img->background_directory = realpath(CRYPTO_PATH . 'securimage/backgrounds/');
+    $img->show();
+  }
+  else
+  {
+    $img->show(realpath(CRYPTO_PATH . 'securimage/backgrounds/' . $temp_conf['bg_image']));
+  }
+}
+else
+{
+  $img->image_bg_color  = new Securimage_Color('#'.$temp_conf['bg_color']);
+  $img->show();
+}

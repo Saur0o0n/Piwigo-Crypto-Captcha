@@ -59,7 +59,7 @@ function randomColor()
   return $c;
 }
 
-foreach (array('image_bg_color','text_color','line_color','noise_color') as $color)
+foreach (array('bg_color','text_color','line_color','noise_color') as $color)
 {
   if ($conf['cryptographp'][$color] == 'random') $conf['cryptographp'][$color] = randomColor();
 }
@@ -74,7 +74,6 @@ $img->captcha_type    = ($conf['cryptographp']['captcha_type'] == 'string') ? Se
 $img->image_width     = $conf['cryptographp']['width']; 
 $img->image_height    = $conf['cryptographp']['height'];
 $img->perturbation    = $conf['cryptographp']['perturbation'];
-$img->image_bg_color  = new Securimage_Color('#'.$conf['cryptographp']['image_bg_color']);
 $img->text_color      = new Securimage_Color('#'.$conf['cryptographp']['text_color']); 
 $img->num_lines       = $conf['cryptographp']['num_lines'];
 $img->line_color      = new Securimage_Color('#'.$conf['cryptographp']['line_color']);
@@ -82,6 +81,20 @@ $img->noise_level     = $conf['cryptographp']['noise_level'];
 $img->noise_color     = new Securimage_Color('#'.$conf['cryptographp']['noise_color']);
 $img->code_length     = $conf['cryptographp']['code_length'];
 
-$img->show();
-
-?>
+if ($conf['cryptographp']['background'] == 'image')
+{
+  if ($conf['cryptographp']['bg_image'] == 'random')
+  {
+    $img->background_directory = realpath(CRYPTO_PATH . 'securimage/backgrounds/');
+    $img->show();
+  }
+  else
+  {
+    $img->show(realpath(CRYPTO_PATH . 'securimage/backgrounds/' . $conf['cryptographp']['bg_image']));
+  }
+}
+else
+{
+  $img->image_bg_color  = new Securimage_Color('#'.$conf['cryptographp']['bg_color']);
+  $img->show();
+}

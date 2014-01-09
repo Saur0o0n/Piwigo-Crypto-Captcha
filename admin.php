@@ -33,7 +33,9 @@ if ( isset($_POST['submit']))
     'width'           => (int)$_POST['width'], 
     'height'          => (int)$_POST['height'],
     'perturbation'    => (float)$_POST['perturbation'],
-    'image_bg_color'  => $_POST['image_bg_color'],
+    'background'      => $_POST['background'],
+    'bg_color'        => $_POST['bg_color'],
+    'bg_image'        => $_POST['bg_image'],
     'code_length'     => (int)$_POST['code_length'],
     'text_color'      => $_POST['text_color'],
     'num_lines'       => (float)$_POST['num_lines'],
@@ -49,12 +51,28 @@ if ( isset($_POST['submit']))
 }
 
 $presets = array(
-  'bluenoise' =>  array('perturbation'=>0.25, 'image_bg_color'=>'ffffff', 'text_color'=>'0000ff', 'num_lines'=>2, 'line_color'=>'0000ff', 'noise_level'=>2,   'noise_color'=>'0000ff', 'ttf_file'=>'AlteHassGroteskB'),
-  'gray' =>       array('perturbation'=>1,    'image_bg_color'=>'ffffff', 'text_color'=>'8a8a8a', 'num_lines'=>2, 'line_color'=>'8a8a8a', 'noise_level'=>0.1, 'noise_color'=>'8a8a8a', 'ttf_file'=>'TopSecret'),
-  'xcolor' =>     array('perturbation'=>0.5,  'image_bg_color'=>'ffffff', 'text_color'=>'random', 'num_lines'=>1, 'line_color'=>'ffffff', 'noise_level'=>2,   'noise_color'=>'ffffff', 'ttf_file'=>'Dread'),
-  'pencil' =>     array('perturbation'=>0.8,  'image_bg_color'=>'9e9e9e', 'text_color'=>'363636', 'num_lines'=>0, 'line_color'=>'ffffff', 'noise_level'=>0,   'noise_color'=>'ffffff', 'ttf_file'=>'AllStar'),
+  'bluenoise' =>  array('perturbation'=>0.25, 'background'=>'color', 'bg_image'=>'', 'bg_color'=>'ffffff', 'text_color'=>'0000ff', 'num_lines'=>2, 'line_color'=>'0000ff', 'noise_level'=>2, 'noise_color'=>'0000ff', 'ttf_file'=>'AlteHassGroteskB'),
+  'gray' =>       array('perturbation'=>1, 'background'=>'color', 'bg_image'=>'', 'bg_color'=>'ffffff', 'text_color'=>'8a8a8a', 'num_lines'=>2, 'line_color'=>'8a8a8a', 'noise_level'=>0.1, 'noise_color'=>'8a8a8a', 'ttf_file'=>'TopSecret'),
+  'xcolor' =>     array('perturbation'=>0.5, 'background'=>'color', 'bg_image'=>'', 'bg_color'=>'ffffff', 'text_color'=>'random', 'num_lines'=>1, 'line_color'=>'ffffff', 'noise_level'=>2, 'noise_color'=>'ffffff', 'ttf_file'=>'Dread'),
+  'pencil' =>     array('perturbation'=>0.8, 'background'=>'color', 'bg_image'=>'', 'bg_color'=>'9e9e9e', 'text_color'=>'363636', 'num_lines'=>0, 'line_color'=>'ffffff', 'noise_level'=>0, 'noise_color'=>'ffffff', 'ttf_file'=>'AllStar'),
+  'ransom' =>     array('perturbation'=>0, 'background'=>'image', 'bg_image'=>'bg1.jpg', 'bg_color'=>'ffffff', 'text_color'=>'4a003a', 'num_lines'=>0, 'line_color'=>'ffffff', 'noise_level'=>0, 'noise_color'=>'ffffff', 'ttf_file'=>'ransom'),
   );
-  
+
+
+$template->assign(array(
+  'crypto' => $conf['cryptographp'],
+  'loaded' => $loaded,
+  'fonts' => list_fonts(CRYPTO_PATH.'securimage/fonts'),
+  'backgrounds' => list_backgrounds(CRYPTO_PATH.'securimage/backgrounds'),
+  'PRESETS' => $presets,
+  'CRYPTO_PATH' => CRYPTO_PATH,
+  ));
+
+$template->set_filename('plugin_admin_content', realpath(CRYPTO_PATH . 'template/admin.tpl'));
+$template->assign_var_from_handle('ADMIN_CONTENT', 'plugin_admin_content');
+
+
+
 function list_fonts($dir)
 {
   $dir = rtrim($dir, '/');
@@ -64,20 +82,33 @@ function list_fonts($dir)
   while (($file = readdir($dh)) !== false )
   {
     if ($file !== '.' && $file !== '..' && get_extension($file)=='ttf') 
-      $fonts[] = get_filename_wo_extension($file);
+    {
+      $fonts[get_filename_wo_extension($file)] = $dir . '/' . $file;
+    }
   }
   
   closedir($dh);
   return $fonts;
 }
 
-$template->assign(array(
-  'crypto' => $conf['cryptographp'],
-  'loaded' => $loaded,
-  'fonts' => list_fonts(CRYPTO_PATH.'securimage/fonts'),
-  'PRESETS' => $presets,
-  'CRYPTO_PATH' => CRYPTO_PATH,
-  ));
-
-$template->set_filename('plugin_admin_content', dirname(__FILE__).'/template/admin.tpl');
-$template->assign_var_from_handle('ADMIN_CONTENT', 'plugin_admin_content');
+function list_backgrounds($dir)
+{
+  $dir = rtrim($dir, '/');
+  $dh = opendir($dir);
+  $backgrounds = array();
+  
+  while (($file = readdir($dh)) !== false )
+  {
+    if ($file !== '.' && $file !== '..')
+    {
+      $ext = get_extension($file);
+      if ($ext=='jpg' || $ext=='png' || $ext=='jpeg' || $ext=='gif')
+      {
+        $backgrounds[$file] = $dir . '/' . $file;
+      }
+    }
+  }
+  
+  closedir($dh);
+  return $backgrounds;
+}

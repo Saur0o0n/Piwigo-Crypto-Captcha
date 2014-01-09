@@ -8,6 +8,8 @@
 
 
 {footer_script}
+var time = 0;
+
 // colorpicker
 $('.colorpicker-input')
   .ColorPicker({
@@ -16,10 +18,8 @@ $('.colorpicker-input')
       $(el).ColorPickerHide(); 
     },
     onChange: function(hsb, hex, rgb, el) { 
-      $(el).val(hex); 
+      $(el).val(hex).trigger('change');
       changeColor(el, hex);
-      changePreview();
-      setThemeCutom();
     },
     onBeforeShow: function () { 
       $(this).ColorPickerSetColor(this.value); 
@@ -32,31 +32,42 @@ $('.colorpicker-input')
   .each(function() {
     changeColor(this, $(this).val());
   });
+  
+  
+$('.button').click(function() {
+  $(this).siblings('.button').removeClass('selected');
+  $(this).addClass('selected');
+  $('input[name='+ $(this).data('input') +']').val($(this).data('val')).trigger('change');
+});
 
 // change button
-$('.button').click(function() {
-  $('.button').removeClass('selected');
-  $(this).addClass('selected');
-  $('input[name=button_color]').val($(this).attr('title'));
-  $('#reload').attr('src', '{$CRYPTO_PATH}template/refresh_'+ $(this).attr('title') +'.png');
+$('input[name=button_color]').change(function() {
+  $('#reload').attr('src', '{$CRYPTO_PATH}template/refresh_'+ $(this).val() +'.png');
 });
 
 // apply a preset
-$('.preset').click(function() {
-  $('.preset').removeClass('selected');
-  $(this).addClass('selected');
-  
-  var id = $(this).attr("title");
+$('input[name=theme]').change(function() {
+  var id = $(this).val();
   
   for (key in presets[id]) {
-    $('input[name="'+ key +'"]').val([presets[id][key]]);
+    if ($('input[name="'+ key +'"]').attr('type') == 'radio') {
+      $('input[name="'+ key +'"][value="'+ presets[id][key] +'"]').prop('checked', true).trigger('change', false);
+    }
+    else {
+      $('input[name="'+ key +'"]').val(presets[id][key]).trigger('change', false);
+    }
   }
   
   $('.colorpicker-input').each(function() {
     changeColor(this, $(this).val());
   });
-  $('input[name="theme"]').val($(this).attr('title'));
+
   changePreview();
+});
+
+// toggle background type
+$('input[name=background]').change(function() {
+  $('li[id^=background]').hide().filter('#background-'+$(this).val()).show();
 });
 
 // display customization panel
@@ -65,13 +76,13 @@ $('.customize').click(function() {
 });
 
 // change theme to 'custom' if a parameter is changed
-$('input.istheme').change(function() {
-  setThemeCutom();
+$('input.istheme').change(function(e, p) {
+  if (p!==false) setThemeCustom();
 });
 
 // update the preview
-$('input.istheme, input.preview').change(function() {
-  changePreview();
+$('input.preview').change(function(e, p) {
+  if (p!==false) changePreview();
 });
 $('#reload').click(function() {
   changePreview();
@@ -79,10 +90,8 @@ $('#reload').click(function() {
 
 // links for random color
 $('a.random').click(function() {
-  $(this).prev('label').children('input').val('random');
+  $(this).prev('label').children('input').val('random').trigger('change');
   changeColor($(this).prev('label').children('input'), 'random');
-  changePreview();
-  setThemeCutom();
 });
 
 // multiselect
@@ -92,16 +101,23 @@ $("select").css({
   disable_search:true,
 });
 
-function setThemeCutom() {
-  $('.preset').removeClass('selected');
+function setThemeCustom() {
+  $('.button[data-input=theme]').removeClass('selected');
   $('input[name=theme]').val('custom');
 }
 
 function changePreview() {
+  var now = (new Date()).getTime();
+
+  if (now-time < 1000) {
+    return;
+  }
+  time = now;
+  
   options = new Array();
   str = '';
   
-  $('input[type="text"], input[type="radio"]:checked').each(function() {
+  $('input.preview:not([type=radio]), input[type=radio].preview:checked').each(function() {
     options[$(this).attr('name')] = $(this).val();
   });
   
@@ -112,7 +128,9 @@ function changePreview() {
 }
 
 function changeColor(target, color) {
-  if (color == 'random') color = '808080';
+  if (color == 'random') {
+    color = '808080';
+  }
   if (parseInt(color, 16) > 16777215/2) {
     $(target).css('color', '#222');
   }
@@ -135,10 +153,10 @@ var presets = {
 
 
 {html_style}
-{foreach from=$fonts item=font}
+{foreach from=$fonts item=path key=font}
 @font-face {  
   font-family: '{$font}';  
-  src: url({$CRYPTO_PATH}securimage/fonts/{$font}.ttf) format("truetype");  
+  src: url({$path}) format("truetype");  
 }
 {/foreach}
 {/html_style}
@@ -192,15 +210,15 @@ var presets = {
     </li>
     <li>
       <b>{'Button color'|translate}</b>
-      <a class="button {if $crypto.button_color == 'dark'}selected{/if}" title="dark"><img src="{$CRYPTO_PATH}template/refresh_dark.png" alt="dark"></a>
-      <a class="button {if $crypto.button_color == 'light'}selected{/if}" title="light"><img src="{$CRYPTO_PATH}template/refresh_light.png" alt="light"></a>
+      <a class="button {if $crypto.button_color == 'dark'}selected{/if}" data-val="dark" data-input="button_color"><img src="{$CRYPTO_PATH}template/refresh_dark.png" alt="dark"></a>
+      <a class="button {if $crypto.button_color == 'light'}selected{/if}" data-val="light" data-input="button_color"><img src="{$CRYPTO_PATH}template/refresh_light.png" alt="light"></a>
       <input type="hidden" name="button_color" value="{$crypto.button_color}">
     </li>
     <li>
       <b>{'Captcha theme'|translate}</b>
-      {foreach from=$PRESETS key=preset item=params}
-      <a class="preset {if $crypto.theme == $preset}selected{/if}" title="{$preset}"><img src="{$CRYPTO_PATH}template/presets/{$preset}.png" alt="{$preset}"></a>
-      {/foreach}
+    {foreach from=$PRESETS key=preset item=params}
+      <a class="button {if $crypto.theme == $preset}selected{/if}" data-val="{$preset}" data-input="theme"><img src="{$CRYPTO_PATH}template/presets/{$preset}.png" alt="{$preset}"></a>
+    {/foreach}
       <input type="hidden" name="theme" value="{$crypto.theme}">
       <a class="customize">{'Customize'|translate}</a>
     </li>
@@ -212,41 +230,54 @@ var presets = {
     <ul>
       <li>
         <b>{'Perturbation'|translate}</b>
-        <label><input type="text" name="perturbation" value="{$crypto.perturbation}" class="istheme" size="6" maxlength="4"> {'range:'|translate} 0 - 1</label>
+        <label><input type="text" name="perturbation" value="{$crypto.perturbation}" class="istheme preview" size="6" maxlength="4"> {'range:'|translate} 0 - 1</label>
       </li>
       <li>
+        <b>{'Background'|translate}</b>
+        <label><input type="radio" name="background" class="istheme preview" value="color" {if $crypto.background == 'color'}checked="checked"{/if}> {'Color'|translate}</label>
+        <label><input type="radio" name="background" class="istheme preview" value="image" {if $crypto.background == 'image'}checked="checked"{/if}> {'Image'|translate}</label>
+      </li>
+      <li id="background-color" {if $crypto.background != 'color'}style="display:none;"{/if}>
         <b>{'Background color'|translate}</b>
-        <label><input type="text" name="image_bg_color" value="{$crypto.image_bg_color}" class="colorpicker-input istheme" size="6" maxlength="6"></label> 
+        <label><input type="text" name="bg_color" value="{$crypto.bg_color}" class="colorpicker-input istheme preview" size="6" maxlength="6"></label> 
         <a class="random" title="{'random'|translate}"><img src="{$CRYPTO_PATH}/template/arrow_switch.png"></a>
+      </li>
+      <li id="background-image" {if $crypto.background != 'image'}style="display:none;"{/if}>
+        <b>{'Background image'|translate}</b>
+      {foreach from=$backgrounds item=path key=background}
+        <a class="button {if $crypto.bg_image == $background}selected{/if}" data-val="{$background}" data-input="bg_image"><img src="{$path}" alt="{$background}" style="width:120px;height:40px;"></a>
+      {/foreach}
+        <!-- <a class="button {if $crypto.bg_image == 'random'}selected{/if}" title="{'random'|translate}" data-val="random" data-input="bg_image"><img src="{$CRYPTO_PATH}/template/arrow_switch.png"></a> -->
+        <input type="hidden" name="bg_image" value="{$crypto.bg_image}" class="istheme preview">
       </li>
       <li>
         <b>{'Text color'|translate}</b>
-        <label><input type="text" name="text_color" value="{$crypto.text_color}" class="colorpicker-input istheme" size="6" maxlength="6"></label> 
+        <label><input type="text" name="text_color" value="{$crypto.text_color}" class="colorpicker-input istheme preview" size="6" maxlength="6"></label> 
         <a class="random" title="{'random'|translate}"><img src="{$CRYPTO_PATH}/template/arrow_switch.png"></a>
       </li>
       <li>
         <b>{'Lines density'|translate}</b>
-        <label><input type="text" name="num_lines" value="{$crypto.num_lines}" class="istheme" size="6" maxlength="4"> {'range:'|translate} 0 - 10</label>
+        <label><input type="text" name="num_lines" value="{$crypto.num_lines}" class="istheme preview" size="6" maxlength="4"> {'range:'|translate} 0 - 10</label>
       </li>
       <li>
         <b>{'Lines color'|translate}</b>
-        <label><input type="text" name="line_color" value="{$crypto.line_color}" class="colorpicker-input istheme" size="6" maxlength="6"></label> 
+        <label><input type="text" name="line_color" value="{$crypto.line_color}" class="colorpicker-input istheme preview" size="6" maxlength="6"></label> 
         <a class="random" title="{'random'|translate}"><img src="{$CRYPTO_PATH}/template/arrow_switch.png"></a>
       </li>
       <li>
         <b>{'Noise level'|translate}</b>
-        <label><input type="text" name="noise_level" value="{$crypto.noise_level}" class="istheme" size="6" maxlength="4"> {'range:'|translate} 0 - 10</label>
+        <label><input type="text" name="noise_level" value="{$crypto.noise_level}" class="istheme preview" size="6" maxlength="4"> {'range:'|translate} 0 - 10</label>
       </li>
       <li>
         <b>{'Noise color'|translate}</b>
-        <label><input type="text" name="noise_color" value="{$crypto.noise_color}" class="colorpicker-input istheme" size="6" maxlength="6"></label> 
+        <label><input type="text" name="noise_color" value="{$crypto.noise_color}" class="colorpicker-input istheme preview" size="6" maxlength="6"></label> 
         <a class="random" title="{'random'|translate}"><img src="{$CRYPTO_PATH}/template/arrow_switch.png"></a>
       </li>
       <li>
         <b>{'Font'|translate}</b>
-        {foreach from=$fonts item=font}
-        <label style="font-family:{$font};" title="{$font}"><input type="radio" name="ttf_file" value="{$font}" {if $crypto.ttf_file == $font}checked="checked"{/if} class="istheme"> {$font}</label>
-        {/foreach}
+      {foreach from=$fonts item=path key=font}
+        <label style="font-family:{$font};" title="{$font}"><input type="radio" name="ttf_file" value="{$font}" {if $crypto.ttf_file == $font}checked="checked"{/if} class="istheme preview"> {$font}</label>
+      {/foreach}
       </li>
     </ul>
     

@@ -4,7 +4,6 @@ $lang['Invalid Captcha'] = 'Invalid Captcha';
 $lang['Enter code'] = 'Enter code';
 $lang['Solve equation'] = 'Solve equation';
 $lang['Button color'] = 'Button color';
-
 $lang['Comments action'] = 'Comments action';
 $lang['Moderate'] = 'Moderate';
 $lang['Captcha type'] = 'Captcha type';
@@ -20,7 +19,6 @@ $lang['Album comments'] = 'Album comments';
 $lang['Register form'] = 'Register form';
 $lang['Contact form'] = 'Contact form';
 $lang['Guestbook'] = 'Guestbook';
-
 $lang['Perturbation'] = 'Perturbation';
 $lang['range:'] = 'range:';
 $lang['random'] = 'random';
@@ -32,6 +30,10 @@ $lang['Noise level'] = 'Noise level';
 $lang['Noise color'] = 'Noise color';
 $lang['Font'] = 'Font';
 $lang['Preview'] = 'Preview';
+$lang['Background'] = 'Background';
+$lang['Background image'] = 'Background image';
+$lang['Color'] = 'Color';
+$lang['Image'] = 'Image';
 $lang['Tip: type "random" on a color field to have a random color'] = 'Tip: type "random" on a color field to have a random color';
 $lang['We detected that EasyCaptcha plugin is available on your gallery. Both plugins can be used at the same time, but you should not under any circumstances activate both of them on the same page.'] = 'We detected that EasyCaptcha plugin is available in your gallery. Both plugins can be used at the same time, but you should not under any circumstances activate both of them on the same page.';
 
