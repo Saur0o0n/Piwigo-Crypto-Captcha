@@ -21,30 +21,30 @@
 // | USA.                                                                  |
 // +-----------------------------------------------------------------------+
 $lang['Activate on'] = 'Activeren';
-$lang['Album comments'] = 'Album commentaar';
-$lang['Background color'] = 'Achtergrond kleur';
-$lang['Captcha theme'] = 'Captcha theme';
+$lang['Album comments'] = 'Album commentaren';
+$lang['Background color'] = 'Achtergrondkleur';
+$lang['Captcha theme'] = 'Captcha thema';
 $lang['Captcha type'] = 'Captcha type';
 $lang['Case sensitive'] = 'Hoofdletter gevoelig';
 $lang['Code lenght'] = 'Lengte code';
 $lang['Random string'] = 'willekeurige  ';
-$lang['Text color'] = 'Tekst kleur';
+$lang['Text color'] = 'Tekstkleur';
 $lang['Guestbook'] = 'Gastenboek';
 $lang['Font'] = 'Lettertype';
 $lang['Enter code'] = 'Voer code in';
-$lang['Contact form'] = 'Contact formulier';
+$lang['Contact form'] = 'Contactformulier';
 $lang['Moderate'] = 'Matig';
-$lang['Comments action'] = 'Commentaar actie';
+$lang['Comments action'] = 'Commentaren actie';
 $lang['Lines color'] = 'Regel kleur';
 $lang['Perturbation'] = 'Verstoring';
-$lang['Tip: type "random" on a color field to have a random color'] = 'Tip: vul "random" in een kleur veld om het een willekeurige kleur te geven';
+$lang['Tip: type "random" on a color field to have a random color'] = 'Tip: vul "random" in een kleurveld om het een willekeurige kleur te geven';
 $lang['Register form'] = 'Registratieformulier';
 $lang['Preview'] = 'Voorbeeld';
-$lang['Picture comments'] = 'Afbeelding commentaar';
+$lang['Picture comments'] = 'Afbeelding commentaren';
 $lang['Simple equation'] = 'Simpele vergelijking';
 $lang['range:'] = 'reeks:';
 $lang['random'] = 'Willekeurig';
-$lang['good value:'] = 'Juiste waarde';
+$lang['good value:'] = 'Juiste waarde:';
 $lang['Solve equation'] = 'Vergelijking oplossen';
 $lang['Noise color'] = 'Ruis kleur';
 $lang['Noise level'] = 'Ruis niveau';
@@ -53,4 +53,8 @@ $lang['Invalid Captcha'] = 'Ongeldige Captcha';
 $lang['Button color'] = 'Knopkleur';
 $lang['We detected that EasyCaptcha plugin is available on your gallery. Both plugins can be used at the same time, but you should not under any circumstances activate both of them on the same page.'] = 'Geconstateerd wordt dat u ook EasyCaptcha gebruikt. Beide plugins kunnen tegelijkertijd gebruikt worden, maar kunnen beter niet op dezelfde pagina tegelijkertijd gebruikt worden.';
 
+$lang['Background'] = 'Achtergrond';
+$lang['Background image'] = 'Achtergrondafbeelding';
+$lang['Color'] = 'Kleur';
+$lang['Image'] = 'Afbeelding';
 ?>
