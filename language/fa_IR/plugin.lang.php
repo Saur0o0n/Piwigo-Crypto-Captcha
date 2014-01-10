@@ -51,4 +51,9 @@ $lang['Solve equation'] = 'معادله حل کردنی';
 $lang['Tip: type "random" on a color field to have a random color'] = 'نکته:نوع راندومی  فیلد های رنگی موجود راندمی دارای رنگ راندومی هستن  ';
 $lang['good value:'] = 'ارزش گذاری صحیح:';
 $lang['range:'] = 'محدوده';
+$lang['Background'] = 'پس زمین';
+$lang['Background image'] = 'پس زمینه عکس';
+$lang['Color'] = 'رنگ';
+$lang['Image'] = 'عکس';
+$lang['We detected that EasyCaptcha plugin is available on your gallery. Both plugins can be used at the same time, but you should not under any circumstances activate both of them on the same page.'] = 'متوجه شدهایم، که پلاگین EasyCaptcha در گالری خود در دسترس است. هر دو پلاگین را می توان در همان زمان استفاده می شود، اما شما نباید را تحت هیچ شرایطی  هر دو آنها را در همان صفحه فعال کنید.';
 ?>

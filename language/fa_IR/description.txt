@@ -1,6 +1,8 @@
-CryptoCaptcha
+
 افزودن تصویر ضد روبات  برای  کتاب مهمان  دیدگاه ها صفحه ثت نام وصفحه محتوا 
-Add a captcha to register, comment, GuestBook and ContactForm pages
+ 
+ register, comment, GuestBook and ContactForm pages
+هرگونه مشکل در ترجمه  را به ادرس زیر ارسال کنید 
 
 
-
+piwigo.org
