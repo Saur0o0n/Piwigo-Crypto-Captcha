@@ -53,4 +53,8 @@ $lang['range:'] = 'rozsah:';
 $lang['Button color'] = 'Farba tlačidla';
 $lang['We detected that EasyCaptcha plugin is available on your gallery. Both plugins can be used at the same time, but you should not under any circumstances activate both of them on the same page.'] = 'Zistili sme, že EasyCaptcha plugin je k dispozícii v galérii. Oba moduly je možné použiť súčasne, ale musia byť za každých okolností aktivované na rovnakej strane.';
 
+$lang['Background'] = 'Pozadie';
+$lang['Background image'] = 'Obrázok na pozadí';
+$lang['Color'] = 'Farba';
+$lang['Image'] = 'Obrázok';
 ?>
