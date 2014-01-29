@@ -5,7 +5,7 @@ $conf['cryptographp']['template'] = 'comment';
 include(CRYPTO_PATH.'include/common.inc.php');
 
 add_event_handler('loc_begin_index', 'add_crypto');
-add_event_handler('user_comment_check_albums', 'check_crypto', EVENT_HANDLER_PRIORITY_NEUTRAL, 2);
+add_event_handler('user_comment_check', 'check_crypto', EVENT_HANDLER_PRIORITY_NEUTRAL, 2);
 
 function add_crypto()
 {
