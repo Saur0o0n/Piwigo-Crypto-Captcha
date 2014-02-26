@@ -32,4 +32,9 @@ $lang['Guestbook'] = 'Vendégkönyv';
 $lang['Picture comments'] = 'Kép hozzászólások';
 $lang['Register form'] = 'Regisztrációs űrlap';
 $lang['Button color'] = 'Gombszín';
+$lang['Background'] = 'Háttér';
+$lang['Background image'] = 'Háttérkép';
+$lang['Color'] = 'Szín';
+$lang['Image'] = 'Kép';
+$lang['We detected that EasyCaptcha plugin is available on your gallery. Both plugins can be used at the same time, but you should not under any circumstances activate both of them on the same page.'] = 'Az EasyCaptcha bővítmény jelenléte érzékelhető a galériában. Használható egy időben mindkét bővítmény, azonban ügyelni kell arra, hogy a két bővítmény ne legyen egyszerre aktív egyazon oldalon.';
 ?>
