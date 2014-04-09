@@ -1,1 +1,1 @@
-Afegeix un Captcha a les pàgines per registrar-se, realitzar comentaris, GuestBook i fòrum de contacte.
+Afegeix un Captcha a les pàgines per registrar-se, realitzar comentaris, llibre de visites i fòrum de contacte.
