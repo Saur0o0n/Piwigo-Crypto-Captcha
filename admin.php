@@ -27,6 +27,7 @@ if ( isset($_POST['submit']))
       'guestbook'   => in_array('guestbook', $_POST['activate_on']) || !$loaded['guestbook'],
       ),
     'comments_action' => $_POST['comments_action'],
+    'guest_only'      => isset($_POST['guest_only']),
     'theme'           => $_POST['theme'],
     'captcha_type'    => $_POST['captcha_type'],
     'case_sensitive'  => 'false', //not used, problem with some fonts

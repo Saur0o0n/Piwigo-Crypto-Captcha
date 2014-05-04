@@ -26,8 +26,6 @@ function check_crypto($action, $comment)
   include_once(CRYPTO_PATH.'securimage/securimage.php');
   $securimage = new Securimage();
 
-  if (!is_a_guest()) return $action;
-
   if ($securimage->check($_POST['captcha_code']) == false)
   {
     if ($conf['cryptographp']['comments_action'] == 'reject') $page['errors'][] = l10n('Invalid Captcha');

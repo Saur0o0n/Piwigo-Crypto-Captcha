@@ -172,6 +172,10 @@ var presets = {
   
   <ul>
     <li>
+      <b><label for="guest_only">{'Only for unauthenticated users'|translate}</label></b>
+      <input type="checkbox" name="guest_only" id="guest_only" {if $crypto.guest_only}checked{/if}>
+    </li>
+    <li>
       <b>{'Activate on'|translate}</b>
       <select name="activate_on[]" multiple>
         <option value="picture" {if $crypto.activate_on.picture}selected{/if}>{'Picture comments'|translate}</option>

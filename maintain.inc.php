@@ -18,13 +18,14 @@ class CryptograPHP_maintain extends PluginMaintain
     {
       $default_config = array(
         'activate_on'     => array(
-              'picture'     => true,
-              'category'    => true,
-              'register'    => true,
-              'contactform' => true,
-              'guestbook'   => true,
-              ),
+          'picture'     => true,
+          'category'    => true,
+          'register'    => true,
+          'contactform' => true,
+          'guestbook'   => true,
+          ),
         'comments_action' => 'reject',
+        'guest_only'      => true,
         'theme'           => 'gray',
         'captcha_type'    => 'string',
         'case_sensitive'  => 'false',
@@ -71,6 +72,10 @@ class CryptograPHP_maintain extends PluginMaintain
         $old_conf['bg_color'] = $old_conf['image_bg_color'];
         $old_conf['bg_image'] = '';
         unset($old_conf['image_bg_color']);
+      }
+      if (!isset($old_conf['guest_only']))
+      {
+        $old_conf['guest_only'] = true;
       }
       
       $conf['cryptographp'] = serialize($old_conf);
