@@ -57,4 +57,4 @@ $lang['Background'] = 'Pozadie';
 $lang['Background image'] = 'Obrázok na pozadí';
 $lang['Color'] = 'Farba';
 $lang['Image'] = 'Obrázok';
-?>
+$lang['Only for unauthenticated users'] = 'Len pre neautorizovaných používateľov';
