@@ -53,4 +53,8 @@ $lang['Noise level'] = '噪点密度';
 $lang['Perturbation'] = '扭曲度';
 $lang['We detected that EasyCaptcha plugin is available on your gallery. Both plugins can be used at the same time, but you should not under any circumstances activate both of them on the same page.'] = '发现 EasyCaptcha 插件已在图库启用，这两个插件可以同时使用，但是绝不可以在相同页面上同时启用这两个插件。';
 
-?>
+$lang['Background'] = '背景';
+$lang['Background image'] = '背景相片';
+$lang['Color'] = '颜色';
+$lang['Image'] = '相片';
+$lang['Only for unauthenticated users'] = '只为未注册用户';
