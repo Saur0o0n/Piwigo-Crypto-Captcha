@@ -38,4 +38,4 @@ $lang['Image'] = 'Immagine';
 $lang['Color'] = 'Colore';
 $lang['Background image'] = 'Immagine di fondo';
 $lang['Background'] = 'Sfondo';
-?>
+$lang['Only for unauthenticated users'] = 'Solo per gli utenti non autenticati';
