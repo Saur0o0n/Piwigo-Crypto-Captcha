@@ -37,4 +37,4 @@ $lang['Background image'] = 'Háttérkép';
 $lang['Color'] = 'Szín';
 $lang['Image'] = 'Kép';
 $lang['We detected that EasyCaptcha plugin is available on your gallery. Both plugins can be used at the same time, but you should not under any circumstances activate both of them on the same page.'] = 'Az EasyCaptcha bővítmény jelenléte érzékelhető a galériában. Használható egy időben mindkét bővítmény, azonban ügyelni kell arra, hogy a két bővítmény ne legyen egyszerre aktív egyazon oldalon.';
-?>
+$lang['Only for unauthenticated users'] = 'Csak ellenőrzött felhasználóknak';
