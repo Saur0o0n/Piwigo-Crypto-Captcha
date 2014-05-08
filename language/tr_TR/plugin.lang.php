@@ -57,4 +57,4 @@ $lang['Background'] = 'Arkaplan';
 $lang['Background image'] = 'Arkaplan görüntüsü';
 $lang['Color'] = 'Renk';
 $lang['Image'] = 'Görüntü';
-?>
+$lang['Only for unauthenticated users'] = 'Sadece kimliği doğrulanmamış kullanıcılar için';
