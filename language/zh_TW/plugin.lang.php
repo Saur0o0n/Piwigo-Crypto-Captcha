@@ -51,4 +51,5 @@ $lang['Button color'] = '按鈕顏色';
 $lang['Background color'] = '背景顏色';
 $lang['Album comments'] = '相冊評論';
 $lang['Activate on'] = '在何處啟用';
-?>
+$lang['Background'] = '背景';
+$lang['Image'] = '圖像';
