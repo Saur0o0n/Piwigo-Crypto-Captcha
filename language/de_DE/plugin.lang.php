@@ -57,4 +57,4 @@ $lang['Background'] = 'Hintergrund';
 $lang['Background image'] = 'Hintergrundbild';
 $lang['Color'] = 'Farbe';
 $lang['Image'] = 'Bild';
-?>
+$lang['Only for unauthenticated users'] = 'Nur für authentifizierte Benutzer';
