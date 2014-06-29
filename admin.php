@@ -47,7 +47,7 @@ if ( isset($_POST['submit']))
     'button_color'    => $_POST['button_color'],
     );
   
-  conf_update_param('cryptographp', serialize($conf['cryptographp']));
+  conf_update_param('cryptographp', $conf['cryptographp']);
   $page['infos'][] = l10n('Information data registered in database');
 }
 

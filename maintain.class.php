@@ -3,8 +3,6 @@ defined('PHPWG_ROOT_PATH') or die('Hacking attempt!');
 
 class CryptograPHP_maintain extends PluginMaintain
 {
-  private $installed = false;
-
   function install($plugin_version, &$errors=array())
   {
     global $conf;
@@ -45,12 +43,11 @@ class CryptograPHP_maintain extends PluginMaintain
         'button_color'    => 'dark',
         );
     
-      $conf['cryptographp'] = serialize($default_config);
-      conf_update_param('cryptographp', $conf['cryptographp']);
+      conf_update_param('cryptographp', $default_config, true);
     }
     else
     {
-      $old_conf = is_string($conf['cryptographp']) ? unserialize($conf['cryptographp']) : $conf['cryptographp'];
+      $old_conf = safe_unserialize($conf['cryptographp']);
       
       if (!isset($old_conf['activate_on']))
       {
@@ -78,23 +75,13 @@ class CryptograPHP_maintain extends PluginMaintain
         $old_conf['guest_only'] = true;
       }
       
-      $conf['cryptographp'] = serialize($old_conf);
-      conf_update_param('cryptographp', $conf['cryptographp']);
-    }
-
-    $this->installed = true;
-  }
-
-  function activate($plugin_version, &$errors=array())
-  {
-    if (!$this->installed)
-    {
-      $this->install($plugin_version, $errors);
+      conf_update_param('cryptographp', $old_conf, true);
     }
   }
 
-  function deactivate()
+  function update($old_version, $new_version, &$errors=array())
   {
+    $this->install($new_version, $errors);
   }
 
   function uninstall()

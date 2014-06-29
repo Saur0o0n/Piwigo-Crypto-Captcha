@@ -8,15 +8,9 @@ Author: Mistic
 Author URI: http://www.strangeplanet.fr
 */
 
-/*
-Author note :
-Le plugin était appellé à l'origine CryptograPHP et utilisait la librairie CryptograPHP
-Puis il a été renommé Crypto Captcha pour plus de clareté
-La version actuelle s'appelle toujours Crypto Captcha mais utilise la librairie Securimage
-*/
+defined('PHPWG_ROOT_PATH') or die('Hacking attempt!');
 
-if (!defined('PHPWG_ROOT_PATH')) die('Hacking attempt!');
-
+// TODO : captcha on mobile
 if (mobile_theme())
 {
   return;
@@ -25,7 +19,6 @@ if (mobile_theme())
 define('CRYPTO_ID',       basename(dirname(__FILE__)));
 define('CRYPTO_PATH' ,    PHPWG_PLUGINS_PATH . CRYPTO_ID . '/');
 define('CRYPTO_ADMIN',    get_root_url() . 'admin.php?page=plugin-' . CRYPTO_ID);
-define('CRYPTO_VERSION',  'auto');
 
 
 add_event_handler('init', 'crypto_init');
@@ -45,13 +38,9 @@ else
 function crypto_init()
 {
   global $conf;
-  
-  include_once(CRYPTO_PATH . 'maintain.inc.php');
-  $maintain = new CryptograPHP_maintain(CRYPTO_ID);
-  $maintain->autoUpdate(CRYPTO_VERSION, 'install');
+  $conf['cryptographp'] = safe_unserialize($conf['cryptographp']);
   
   load_language('plugin.lang', CRYPTO_PATH);
-  $conf['cryptographp'] = unserialize($conf['cryptographp']);
 }
 
 
