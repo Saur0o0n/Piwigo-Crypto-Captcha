@@ -36,4 +36,5 @@ $lang['Color'] = 'Couleur';
 $lang['Image'] = 'Image';
 $lang['Tip: type "random" on a color field to have a random color'] = 'Astuce: inscrivez "random" dans un champs de couleur pour avoir une couleur aléatoire';
 $lang['We detected that EasyCaptcha plugin is available on your gallery. Both plugins can be used at the same time, but you should not under any circumstances activate both of them on the same page.'] = 'Nous avons détecté que EasyCaptcha est activé sur votre galerie. Les deux plugins peuvent fonctionner en même temps, mais sous aucun prétexte ils ne doivent être activés sur les mêmes pages.';
+$lang['Nowhere'] = 'Nulle part';
 $lang['Only for unauthenticated users'] = 'Seulement pour les utilisateurs non connectés';

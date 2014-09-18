@@ -175,7 +175,7 @@ var presets = {
     </li>
     <li>
       <b>{'Activate on'|translate}</b>
-      <select name="activate_on[]" multiple>
+      <select name="activate_on[]" multiple placeholder="{'Nowhere'|translate}">
         <option value="picture" {if $crypto.activate_on.picture}selected{/if}>{'Picture comments'|translate}</option>
         {if $loaded.category}<option value="category" {if $crypto.activate_on.category}selected{/if}>{'Album comments'|translate}</option>{/if}
         <option value="register" {if $crypto.activate_on.register}selected{/if}>{'Register form'|translate}</option>
