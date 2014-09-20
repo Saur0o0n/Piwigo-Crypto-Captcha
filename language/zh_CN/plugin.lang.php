@@ -58,3 +58,4 @@ $lang['Background image'] = '背景相片';
 $lang['Color'] = '颜色';
 $lang['Image'] = '相片';
 $lang['Only for unauthenticated users'] = '只为未注册用户';
+$lang['Nowhere'] = '任何地方';
