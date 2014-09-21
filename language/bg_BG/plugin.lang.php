@@ -57,3 +57,4 @@ $lang['Background color'] = 'Цвят на фона';
 $lang['Background'] = 'Фонд';
 $lang['Album comments'] = 'Коментари в албуми';
 $lang['Activate on'] = 'Активирано за';
+$lang['Nowhere'] = 'Никъде';
