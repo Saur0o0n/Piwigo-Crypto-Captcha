@@ -39,3 +39,4 @@ $lang['Color'] = 'Krāsa';
 $lang['Background image'] = 'Fona attēls';
 $lang['Background'] = 'Fons';
 $lang['Only for unauthenticated users'] = 'Tikai neautorizētiem lietotājiem';
+$lang['Nowhere'] = 'Nekur';
