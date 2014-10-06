@@ -58,3 +58,4 @@ $lang['Background image'] = 'Achtergrondafbeelding';
 $lang['Color'] = 'Kleur';
 $lang['Image'] = 'Afbeelding';
 $lang['Only for unauthenticated users'] = 'Alleen voor niet-geverifieerde gebruikers';
+$lang['Nowhere'] = 'Nergens';
