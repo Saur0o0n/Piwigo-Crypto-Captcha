@@ -1,0 +1,1 @@
+﻿Doda varnostno anti-spam preverjanje (Captcha) na stran registracije, pod komentarje, Knjigo gostov in pod Kontaktni obrazec.
