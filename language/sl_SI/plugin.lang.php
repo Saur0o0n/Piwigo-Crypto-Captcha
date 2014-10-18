@@ -1,6 +1,6 @@
 <?php
 
-$lang['Invalid Captcha'] = 'Neveljavna Captcha';
+$lang['Invalid Captcha'] = 'Napaka Captcha';
 $lang['Enter code'] = 'Prepiši znake';
 $lang['Solve equation'] = 'Rešitev enčbe';
 $lang['Button color'] = 'Barva gumba';
@@ -38,3 +38,4 @@ $lang['Tip: type "random" on a color field to have a random color'] = 'Namig: ti
 $lang['We detected that EasyCaptcha plugin is available on your gallery. Both plugins can be used at the same time, but you should not under any circumstances activate both of them on the same page.'] = 'Zaznali smo da je v vaši galeriji na voljo vtičnik EasyCaptcha. Oba vtičnika se lahko uporabljata vendar pa pod nobenim pogojem ne smete aktivirati oba vtičnika na isti strani.';
 $lang['Only for unauthenticated users'] = 'Samo za nepreverjene uporabnike';
 
+$lang['Nowhere'] = 'Nikjer';
