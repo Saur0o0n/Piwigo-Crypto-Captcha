@@ -55,3 +55,7 @@ $lang['We detected that EasyCaptcha plugin is available on your gallery. Both pl
 
 $lang['Background'] = 'Фон';
 $lang['Image'] = 'Зображення';
+$lang['Background image'] = 'Фонове зображення';
+$lang['Color'] = 'Колір';
+$lang['Nowhere'] = 'Ніде';
+$lang['Only for unauthenticated users'] = 'Тільки для користувачів, що не пройшли перевірку';
