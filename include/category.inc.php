@@ -1,5 +1,5 @@
 <?php
-defined('CRYPTO_ID') or die('Hacking attempt!');
+defined('CRYPTO_PATH') or die('Hacking attempt!');
 
 $conf['cryptographp']['template'] = 'comment';
 include(CRYPTO_PATH.'include/common.inc.php');

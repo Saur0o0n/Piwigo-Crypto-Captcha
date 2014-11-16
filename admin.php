@@ -1,5 +1,5 @@
 <?php
-defined('CRYPTO_ID') or die('Hacking attempt!');
+defined('CRYPTO_PATH') or die('Hacking attempt!');
 
 global $pwg_loaded_plugins;
 $loaded = array(

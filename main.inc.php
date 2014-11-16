@@ -10,15 +10,24 @@ Author URI: http://www.strangeplanet.fr
 
 defined('PHPWG_ROOT_PATH') or die('Hacking attempt!');
 
-// TODO : captcha on mobile
+if (basename(dirname(__FILE__)) != 'CryptograPHP')
+{
+  add_event_handler('init', 'cryptocaptcha_error');
+  function cryptocaptcha_error()
+  {
+    global $page;
+    $page['errors'][] = 'Crypto Captcha folder name is incorrect, uninstall the plugin and rename it to "CryptograPHP"';
+  }
+  return;
+}
+
 if (mobile_theme())
 {
   return;
 }
 
-define('CRYPTO_ID',       basename(dirname(__FILE__)));
-define('CRYPTO_PATH' ,    PHPWG_PLUGINS_PATH . CRYPTO_ID . '/');
-define('CRYPTO_ADMIN',    get_root_url() . 'admin.php?page=plugin-' . CRYPTO_ID);
+define('CRYPTO_PATH' ,    PHPWG_PLUGINS_PATH . 'CryptograPHP/');
+define('CRYPTO_ADMIN',    get_root_url() . 'admin.php?page=plugin-CryptograPHP');
 
 
 add_event_handler('init', 'crypto_init');
